@@ -14,6 +14,9 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "bulma": "^0.7.1",
+    "bulma-accordion": "^1.0.1",
+    "bulma-timeline": "^2.0.1",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
   },
@@ -83,5 +86,18 @@
     "> 1%",
     "last 2 versions",
     "not ie <= 8"
-  ]
+  ],
+  "main": ".eslintrc.js",
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dodekoekjes/IDP.git"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dodekoekjes/IDP/issues"
+  },
+  "homepage": "https://github.com/dodekoekjes/IDP#readme"
 }
