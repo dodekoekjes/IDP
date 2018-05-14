@@ -3,16 +3,15 @@
     <section id="app">
 <!--  Asset 1 -->
       <div class="container">
-        <h2 class="section heading has-text-centered">{{ naam }}</h2>
+        <h2 class="section heading has-text-centered">Group Members</h2>
         <div class="section">
           <div class="columns">
             <div class="column feature-box">
               <div class="title">
-                Primary Shortcut
+                {{ one.name }}
               </div>
               <div class="text">
-                You can link a website to the keys of your choice by using ALT + 'KEY'.
-                The 'KEY' used can be alphanumeric (letters A-Z, numbers 0-9).
+                {{ one.content }}
               </div>
             </div>
             <div class="column">
@@ -23,16 +22,14 @@
       </div>
 <!--  Asset 2 -->
       <div class="container">
-        <h2 class="section heading has-text-centered">How it works</h2>
         <div class="section">
           <div class="columns">
             <div class="column feature-box">
               <div class="title">
-                Primary Shortcut
+                {{ two.name }}
               </div>
               <div class="text">
-                You can link a website to the keys of your choice by using ALT + 'KEY'.
-                The 'KEY' used can be alphanumeric (letters A-Z, numbers 0-9).
+                {{ two.content }}
               </div>
             </div>
             <div class="column">
@@ -43,16 +40,14 @@
       </div>
 <!--  Asset 3 -->
       <div class="container">
-        <h2 class="section heading has-text-centered">How it works</h2>
         <div class="section">
           <div class="columns">
             <div class="column feature-box">
               <div class="title">
-                Primary Shortcut
+                {{ three.name }}
               </div>
               <div class="text">
-                You can link a website to the keys of your choice by using ALT + 'KEY'.
-                The 'KEY' used can be alphanumeric (letters A-Z, numbers 0-9).
+                {{ three.content }}
               </div>
             </div>
             <div class="column">
@@ -63,16 +58,14 @@
       </div>
 <!--  Asset 4 -->
       <div class="container">
-        <h2 class="section heading has-text-centered">How it works</h2>
         <div class="section">
           <div class="columns">
             <div class="column feature-box">
               <div class="title">
-                Primary Shortcut
+                {{ four.name }}
               </div>
               <div class="text">
-                You can link a website to the keys of your choice by using ALT + 'KEY'.
-                The 'KEY' used can be alphanumeric (letters A-Z, numbers 0-9).
+                {{ four.content }}
               </div>
             </div>
             <div class="column">
@@ -83,16 +76,14 @@
       </div>
 <!--  Asset 5 -->
       <div class="container">
-        <h2 class="section heading has-text-centered">How it works</h2>
         <div class="section">
           <div class="columns">
             <div class="column feature-box">
               <div class="title">
-                Primary Shortcut
+                {{ five.name }}
               </div>
               <div class="text">
-                You can link a website to the keys of your choice by using ALT + 'KEY'.
-                The 'KEY' used can be alphanumeric (letters A-Z, numbers 0-9).
+                {{ five.content }}
               </div>
             </div>
             <div class="column">
@@ -103,16 +94,14 @@
       </div>
 <!--  Asset 6 -->
       <div class="container">
-        <h2 class="section heading has-text-centered">How it works</h2>
         <div class="section">
           <div class="columns">
             <div class="column feature-box">
               <div class="title">
-                Primary Shortcut
+                {{ six.name }}
               </div>
               <div class="text">
-                You can link a website to the keys of your choice by using ALT + 'KEY'.
-                The 'KEY' used can be alphanumeric (letters A-Z, numbers 0-9).
+                {{ six.content }}
               </div>
             </div>
             <div class="column">
@@ -123,16 +112,14 @@
       </div>
 <!--  Asset 7 -->
       <div class="container">
-        <h2 class="section heading has-text-centered">How it works</h2>
         <div class="section">
           <div class="columns">
             <div class="column feature-box">
               <div class="title">
-                Primary Shortcut
+                {{ seven.name }}
               </div>
               <div class="text">
-                You can link a website to the keys of your choice by using ALT + 'KEY'.
-                The 'KEY' used can be alphanumeric (letters A-Z, numbers 0-9).
+                {{ seven.content }}
               </div>
             </div>
             <div class="column">
@@ -143,16 +130,14 @@
       </div>
 <!--  Asset 8 -->
       <div class="container">
-        <h2 class="section heading has-text-centered">How it works</h2>
         <div class="section">
           <div class="columns">
             <div class="column feature-box">
               <div class="title">
-                Primary Shortcut
+                {{ eight.name }}
               </div>
               <div class="text">
-                You can link a website to the keys of your choice by using ALT + 'KEY'.
-                The 'KEY' used can be alphanumeric (letters A-Z, numbers 0-9).
+                {{ eight.content }}
               </div>
             </div>
             <div class="column">
@@ -163,16 +148,14 @@
       </div>
 <!--  Asset 9 -->
       <div class="container">
-        <h2 class="section heading has-text-centered">How it works</h2>
         <div class="section">
           <div class="columns">
             <div class="column feature-box">
               <div class="title">
-                Primary Shortcut
+                {{ nine.name }}
               </div>
               <div class="text">
-                You can link a website to the keys of your choice by using ALT + 'KEY'.
-                The 'KEY' used can be alphanumeric (letters A-Z, numbers 0-9).
+                {{ nine.content}}
               </div>
             </div>
             <div class="column">
@@ -183,16 +166,14 @@
       </div>
 <!--  Asset 10 -->
       <div class="container">
-        <h2 class="section heading has-text-centered">How it works</h2>
         <div class="section">
           <div class="columns">
             <div class="column feature-box">
               <div class="title">
-                Primary Shortcut
+                {{ ten.name }}
               </div>
               <div class="text">
-                You can link a website to the keys of your choice by using ALT + 'KEY'.
-                The 'KEY' used can be alphanumeric (letters A-Z, numbers 0-9).
+                {{ ten.content}}
               </div>
             </div>
             <div class="column">
@@ -203,16 +184,14 @@
       </div>
 <!--  Asset 11 -->
       <div class="container">
-        <h2 class="section heading has-text-centered">How it works</h2>
         <div class="section">
           <div class="columns">
             <div class="column feature-box">
               <div class="title">
-                Primary Shortcut
+                {{ eleven.name }}
               </div>
               <div class="text">
-                You can link a website to the keys of your choice by using ALT + 'KEY'.
-                The 'KEY' used can be alphanumeric (letters A-Z, numbers 0-9).
+                {{ eleven.content }}
               </div>
             </div>
             <div class="column">
@@ -227,23 +206,54 @@
 
 <script>
 export default {
-  name: 'About us',
-  content: [
-    { one: '1' },
-    { two: '2' },
-    { three: '3' },
-    { four: '4' },
-    { five: '5' },
-    { six: '6' },
-    { seven: '7' },
-    { eight: '8' },
-    { nine: '9' },
-    { ten: '10' },
-    { eleven: '11' }
-  ],
-  object: {
-    naam: 'hoi',
-    achternaam: 'dag'
+  data () {
+    return {
+      name: 'About',
+      one: {
+        name: 'Janine van den Akker',
+        content: 'Lorem ipsum dolor sit amet, cu qui persius lucilius repudiare, vel eu noster pertinacia scribentur, legere graeco qui ea. An est hinc corrumpit voluptaria. Per ad iudico iuvaret, atqui iisque ei vis. Reque soleat qui an, ne has solum augue. Nec ad alia ludus viderer, te mei aliquid suscipiantur.'
+      },
+      two: {
+        name: 'Remco van Akker',
+        content: 'Lorem ipsum dolor sit amet, cu qui persius lucilius repudiare, vel eu noster pertinacia scribentur, legere graeco qui ea. An est hinc corrumpit voluptaria. Per ad iudico iuvaret, atqui iisque ei vis. Reque soleat qui an, ne has solum augue. Nec ad alia ludus viderer, te mei aliquid suscipiantur.'
+      },
+      three: {
+        name: 'Pieter Westra',
+        content: 'Lorem ipsum dolor sit amet, cu qui persius lucilius repudiare, vel eu noster pertinacia scribentur, legere graeco qui ea. An est hinc corrumpit voluptaria. Per ad iudico iuvaret, atqui iisque ei vis. Reque soleat qui an, ne has solum augue. Nec ad alia ludus viderer, te mei aliquid suscipiantur.'
+      },
+      four: {
+        name: 'Sjoerd Bosma',
+        content: 'Lorem ipsum dolor sit amet, cu qui persius lucilius repudiare, vel eu noster pertinacia scribentur, legere graeco qui ea. An est hinc corrumpit voluptaria. Per ad iudico iuvaret, atqui iisque ei vis. Reque soleat qui an, ne has solum augue. Nec ad alia ludus viderer, te mei aliquid suscipiantur.'
+      },
+      five: {
+        name: 'Tristan Kruijshaar',
+        content: 'Lorem ipsum dolor sit amet, cu qui persius lucilius repudiare, vel eu noster pertinacia scribentur, legere graeco qui ea. An est hinc corrumpit voluptaria. Per ad iudico iuvaret, atqui iisque ei vis. Reque soleat qui an, ne has solum augue. Nec ad alia ludus viderer, te mei aliquid suscipiantur.'
+      },
+      six: {
+        name: 'Maarten Mosterd',
+        content: 'Lorem ipsum dolor sit amet, cu qui persius lucilius repudiare, vel eu noster pertinacia scribentur, legere graeco qui ea. An est hinc corrumpit voluptaria. Per ad iudico iuvaret, atqui iisque ei vis. Reque soleat qui an, ne has solum augue. Nec ad alia ludus viderer, te mei aliquid suscipiantur.'
+      },
+      seven: {
+        name: 'Pieter Terpstra',
+        content: 'Lorem ipsum dolor sit amet, cu qui persius lucilius repudiare, vel eu noster pertinacia scribentur, legere graeco qui ea. An est hinc corrumpit voluptaria. Per ad iudico iuvaret, atqui iisque ei vis. Reque soleat qui an, ne has solum augue. Nec ad alia ludus viderer, te mei aliquid suscipiantur.'
+      },
+      eight: {
+        name: 'Irwan van Dijk',
+        content: 'Lorem ipsum dolor sit amet, cu qui persius lucilius repudiare, vel eu noster pertinacia scribentur, legere graeco qui ea. An est hinc corrumpit voluptaria. Per ad iudico iuvaret, atqui iisque ei vis. Reque soleat qui an, ne has solum augue. Nec ad alia ludus viderer, te mei aliquid suscipiantur.'
+      },
+      nine: {
+        name: 'Jesse Roada',
+        content: 'Lorem ipsum dolor sit amet, cu qui persius lucilius repudiare, vel eu noster pertinacia scribentur, legere graeco qui ea. An est hinc corrumpit voluptaria. Per ad iudico iuvaret, atqui iisque ei vis. Reque soleat qui an, ne has solum augue. Nec ad alia ludus viderer, te mei aliquid suscipiantur.'
+      },
+      ten: {
+        name: 'Harm Korre',
+        content: 'Lorem ipsum dolor sit amet, cu qui persius lucilius repudiare, vel eu noster pertinacia scribentur, legere graeco qui ea. An est hinc corrumpit voluptaria. Per ad iudico iuvaret, atqui iisque ei vis. Reque soleat qui an, ne has solum augue. Nec ad alia ludus viderer, te mei aliquid suscipiantur.'
+      },
+      eleven: {
+        name: 'Freerk Hoekstra',
+        content: 'Lorem ipsum dolor sit amet, cu qui persius lucilius repudiare, vel eu noster pertinacia scribentur, legere graeco qui ea. An est hinc corrumpit voluptaria. Per ad iudico iuvaret, atqui iisque ei vis. Reque soleat qui an, ne has solum augue. Nec ad alia ludus viderer, te mei aliquid suscipiantur.'
+      }
+    }
   }
 }
 </script>
@@ -334,7 +344,6 @@ export default {
   }
   code,pre {
     -moz-osx-font-smoothing:auto;
-    -webkit-font-smoothing:auto;
     font-family:monospace
   }
   body {
@@ -3364,12 +3373,6 @@ export default {
     color:#507ce8;
     font-size:16px;
     font-weight:600
-  }
-  .chrome-installation {
-    background-image:url(/static/img/chrome.svg)
-  }
-  .firefox-installation {
-    background-image:url(/static/img/firefox.svg)
   }
   .feature-box {
     margin:4rem;

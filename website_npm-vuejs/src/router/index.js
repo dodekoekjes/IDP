@@ -8,7 +8,10 @@ import ErrorPage from '@/components/ErrorPage'
 // Pages
 import HomePage from '@/pages/HomePage'
 import About from '@/pages/About'
-import progress from '@/pages/Progress'
+import Progress from '@/pages/Progress'
+import Informatica from '@/pages/Informatica'
+import Electrotechniek from '@/pages/Elektrotechniek'
+import Werktuigbouwkunde from '@/pages/Werktuigbouwkunde'
 
 Vue.use(Router)
 
@@ -38,7 +41,22 @@ export default new Router({
     {
       path: '/progress',
       name: 'Progress',
-      component: progress
+      component: Progress
+    },
+    {
+      path: '/informatica',
+      name: 'Informatica',
+      component: Informatica
+    },
+    {
+      path: '/elektrotechniek',
+      name: 'Electrotechniek',
+      component: Electrotechniek
+    },
+    {
+      path: '/werktuigbouwkunde',
+      name: 'Werktuigbouwkunde',
+      component: Werktuigbouwkunde
     },
     {
       path: '/', redirect: '/home'
