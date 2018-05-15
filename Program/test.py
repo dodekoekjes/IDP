@@ -1,6 +1,9 @@
 import pyax12
 from pyax12.connection import Connection
-import RPi.GPIO as gpio
+import RPi.GPIO as GPIO
+
+GPIO.setmode(GPIO.BCM)
+GPIO.setup(18, GPIO.OUT)
 
 # Connect to the serial port
 serial_connection = Connection(port="/dev/ttyAMA0", rpi_gpio=True)
