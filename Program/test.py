@@ -6,7 +6,7 @@ GPIO.setmode(GPIO.BCM)
 GPIO.setup(18, GPIO.OUT)
 
 # Connect to the serial port
-serial_connection = Connection(port="/dev/ttyAMA18", rpi_gpio=True)
+serial_connection = Connection(port="/dev/ttyAMA0", rpi_gpio=True)
 
 dynamixel_id = 1
 
