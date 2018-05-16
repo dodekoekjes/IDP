@@ -71,4 +71,10 @@ Website/.idea/misc.xml
 Website/*.ipr
 
 
+### Python
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
 # End of https://www.gitignore.io/api/webstorm+all
