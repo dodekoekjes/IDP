@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">IDP_app</string>
+    <string-array name="content">
+        <item>1ste</item>
+        <item>2de</item>
+    </string-array>
 </resources>
