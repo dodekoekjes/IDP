@@ -1,5 +1,8 @@
 from time import sleep
 import ax12
+import RPi.GPIO as GPIO
+
+import sys
 
 from random import randint
 
@@ -29,18 +32,6 @@ xMaxLimit = 500
 
 a = 0
 
-def moveX(id, anglePos, speed):
-    if anglePos >= xMinLimit and anglePos <= xMaxLimit:
-        servos.moveSpeed(id, anglePos, speed)
-        sleep(4)
-    else:
-        print "Limit X reached"
-    sleep(2)
-    
-def reset():
-    moveX(1, xMinLimit, 200)
-#    sleep(2)
-
 def rust():
     servos.moveSpeed(1, 350, 200)
     servos.moveSpeed(2, 0, 200)
@@ -54,14 +45,19 @@ def moveLeg():
 intersleep = 0.5
 def reset_all():
     numlegs = 4
-    for i in range(numlegs):
-        print("Resetting leg " + str(i+1) +  "...")
-        servos.moveSpeed(i*3 + 1, 350, 200)
-        sleep(intersleep)
-        servos.moveSpeed(i*3 + 2, 0, 200)
-        sleep(intersleep)
-        servos.moveSpeed(i*3 + 3, 70, 200)
-        sleep(intersleep)
+    
+    
+    for i in range(4):
+        
+        servos.moveSpeed(i * 3 + 2, 150, 200)
+        servos.moveSpeed(i * 3 + 3, 150, 200)
+        servos.moveSpeed(i * 3 + 1, 350, 200)
+        sleep(0.5)
+    
+    #servos.moveSpeed(2, 300, 200)
+    #servos.moveSpeed(3, 300, 200)
+    #servos.moveSpeed(1, 350, 200)
+    
     wait = 3
     for i in range(wait):
         print(str(wait - i) + "...")
@@ -69,24 +65,31 @@ def reset_all():
 
 reset_all()
 intersleep = 1
-while(1):
+
+orig_stdout = sys.stdout
+sys.stdout = open('log', 'w')
+do_loop = True
+while(do_loop):
+    #servos.readLoad(3)
+    #servos.readLoad(6)
+    #servos.readLoad(9)
+    #servos.readLoad(12)
+    
+    
     if a == 0:
-        #servos.moveSpeed(1, xMinLimit, 200)
-        #sleep(0.5)
-        #servos.moveSpeed(2, yMinLimit, 200)
-        #sleep(0.25)
-        # OMLAAG
-        #servos.moveSpeed(2, 1000, 200)
-        #sleep(intersleep)
-        #servos.moveSpeed(5, 1000, 200)
-        #sleep(intersleep)
-        #servos.moveSpeed(8, 1000, 200)
-        #sleep(intersleep)
-        #servos.moveSpeed(11, 1000, 200)
+        #servos.moveSpeed(1, 500, 200)
+        #servos.moveSpeed(2, 500, 200)
+        #servos.moveSpeed(3, 500, 200)
         
         for i in range(4):
-            servos.moveSpeed(i * 3 + 2, 1000, 200)
-            servos.moveSpeed(i * 3 + 3, 1000, 200)
+            #servos.moveSpeed(i * 3 + 1, 400, 200)
+            servos.moveSpeed(i * 3 + 2, 500, 200)
+            servos.moveSpeed(i * 3 + 3, 500, 200)
+            
+            print(str(i*3+1) + ": " + str(servos.readLoad(i*3+1)))
+            print(str(i*3+2) + ": " + str(servos.readLoad(i*3+2)))
+            print(str(i*3+3) + ": " + str(servos.readLoad(i*3+3)))
+        
         #sleep(intersleep)
         a+=1
     else:
@@ -100,17 +103,31 @@ while(1):
         #servos.moveSpeed(5, 0, 200)
         #servos.moveSpeed(2, 0, 200)
         
+        #servos.moveSpeed(1, 350, 200)
+        #servos.moveSpeed(2, 150, 200)
+        #servos.moveSpeed(3, 150, 200)
+        
         for i in range(4):
-            servos.moveSpeed(i * 3 + 2, 0, 200)
-            servos.moveSpeed(i * 3 + 3, 0, 200)
+            #servos.moveSpeed(i * 3 + 1, 350, 100)
+            servos.moveSpeed(i * 3 + 2, 150, 200)
+            servos.moveSpeed(i * 3 + 3, 150, 200)
+            
+            print(str(i*3+1) + ": " + str(servos.readLoad(i*3+1)))
+            print(str(i*3+2) + ": " + str(servos.readLoad(i*3+2)))
+            print(str(i*3+3) + ": " + str(servos.readLoad(i*3+3)))
+            
         #sleep(intersleep)
         #sleep(intersleep)
         #sleep(intersleep)
 
         #sleep(intersleep)
         a=0
-        
-    sleep(2)
+    
+    sleep(1.5)
+
+sys.stdout = orig_stdout
+print("Goodbye :c")
+
 
         
 #moveLeg()
