@@ -1,32 +1,36 @@
 from pyax12.connection import Connection
 # import RPi.GPIO as gpio
-from ax12 import Ax12
+# from ax12 import Ax12
+from util.observer import Observable
 
 
-class MovementControls:
+class MovementControls(Observable):
     """Manages movement controls"""
     def __init__(self):
         """Init"""
+        super().__init__()
         print("class: MovementControls created.")
-        ax = Ax12()
-        ax.
+#        ax = Ax12()
 
-    def test(self):
-        # gpio.setup(18, gpio.OUT)
-        # gpio.setwarnings(False)
-        serial_connection = Connection(port="/dev/ttyAMA0", rpi_gpio=True)
+    def notifyObservers(self, arg=None):
+        """Notifies the observers"""
+        self.setChanged()
+        Observable.notifyObservers(self, arg)
 
-        dynamix_id = 3
-
-        is_available = serial_connection.ping(dynamix_id)
-
-        print(is_available)
-
-        serial_connection.close()
+    def command(self):
+        pass
 
 
-class ArmControls:
+class ArmControls(Observable):
     """Manages arm controls"""
     def __init__(self):
         """Init"""
+        super().__init__()
         print("class: ArmControls created.")
+
+    def notifyObservers(self, arg=None):
+        """Notifies the observers"""
+        self.setChanged()
+        Observable.notifyObservers(self, arg)
+    def command(self):
+        pass
