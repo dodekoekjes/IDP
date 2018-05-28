@@ -17,6 +17,7 @@
     "bulma": "^0.7.1",
     "bulma-accordion": "^1.0.1",
     "bulma-timeline": "^2.0.1",
+    "surge": "^0.20.1",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"
   },

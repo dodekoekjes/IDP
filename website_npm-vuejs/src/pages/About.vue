@@ -14,16 +14,6 @@
                 {{ one.content }}
               </div>
             </div>
-            <div class="column">
-              <img class="image-box border-shadow " src="https://anyshortcut.com/static/img/shortcut-keyboard.jpg" alt="">
-            </div>
-          </div>
-        </div>
-      </div>
-<!--  Asset 2 -->
-      <div class="container">
-        <div class="section">
-          <div class="columns">
             <div class="column feature-box">
               <div class="title">
                 {{ two.name }}
@@ -32,13 +22,10 @@
                 {{ two.content }}
               </div>
             </div>
-            <div class="column">
-              <img class="image-box border-shadow " src="https://anyshortcut.com/static/img/shortcut-keyboard.jpg" alt="">
-            </div>
           </div>
         </div>
       </div>
-<!--  Asset 3 -->
+<!--  Asset 2 -->
       <div class="container">
         <div class="section">
           <div class="columns">
@@ -50,16 +37,6 @@
                 {{ three.content }}
               </div>
             </div>
-            <div class="column">
-              <img class="image-box border-shadow " src="https://anyshortcut.com/static/img/shortcut-keyboard.jpg" alt="">
-            </div>
-          </div>
-        </div>
-      </div>
-<!--  Asset 4 -->
-      <div class="container">
-        <div class="section">
-          <div class="columns">
             <div class="column feature-box">
               <div class="title">
                 {{ four.name }}
@@ -68,13 +45,10 @@
                 {{ four.content }}
               </div>
             </div>
-            <div class="column">
-              <img class="image-box border-shadow " src="https://anyshortcut.com/static/img/shortcut-keyboard.jpg" alt="">
-            </div>
           </div>
         </div>
       </div>
-<!--  Asset 5 -->
+<!--  Asset 3 -->
       <div class="container">
         <div class="section">
           <div class="columns">
@@ -86,16 +60,6 @@
                 {{ five.content }}
               </div>
             </div>
-            <div class="column">
-              <img class="image-box border-shadow " src="https://anyshortcut.com/static/img/shortcut-keyboard.jpg" alt="">
-            </div>
-          </div>
-        </div>
-      </div>
-<!--  Asset 6 -->
-      <div class="container">
-        <div class="section">
-          <div class="columns">
             <div class="column feature-box">
               <div class="title">
                 {{ six.name }}
@@ -104,13 +68,10 @@
                 {{ six.content }}
               </div>
             </div>
-            <div class="column">
-              <img class="image-box border-shadow " src="https://anyshortcut.com/static/img/shortcut-keyboard.jpg" alt="">
-            </div>
           </div>
         </div>
       </div>
-<!--  Asset 7 -->
+<!--  Asset 4 -->
       <div class="container">
         <div class="section">
           <div class="columns">
@@ -122,16 +83,6 @@
                 {{ seven.content }}
               </div>
             </div>
-            <div class="column">
-              <img class="image-box border-shadow " src="https://anyshortcut.com/static/img/shortcut-keyboard.jpg" alt="">
-            </div>
-          </div>
-        </div>
-      </div>
-<!--  Asset 8 -->
-      <div class="container">
-        <div class="section">
-          <div class="columns">
             <div class="column feature-box">
               <div class="title">
                 {{ eight.name }}
@@ -140,13 +91,10 @@
                 {{ eight.content }}
               </div>
             </div>
-            <div class="column">
-              <img class="image-box border-shadow " src="https://anyshortcut.com/static/img/shortcut-keyboard.jpg" alt="">
-            </div>
           </div>
         </div>
       </div>
-<!--  Asset 9 -->
+<!--  Asset 5 -->
       <div class="container">
         <div class="section">
           <div class="columns">
@@ -158,16 +106,6 @@
                 {{ nine.content}}
               </div>
             </div>
-            <div class="column">
-              <img class="image-box border-shadow " src="https://anyshortcut.com/static/img/shortcut-keyboard.jpg" alt="">
-            </div>
-          </div>
-        </div>
-      </div>
-<!--  Asset 10 -->
-      <div class="container">
-        <div class="section">
-          <div class="columns">
             <div class="column feature-box">
               <div class="title">
                 {{ ten.name }}
@@ -176,13 +114,10 @@
                 {{ ten.content}}
               </div>
             </div>
-            <div class="column">
-              <img class="image-box border-shadow " src="https://anyshortcut.com/static/img/shortcut-keyboard.jpg" alt="">
-            </div>
           </div>
         </div>
       </div>
-<!--  Asset 11 -->
+<!--  Asset 6 -->
       <div class="container">
         <div class="section">
           <div class="columns">
@@ -195,7 +130,6 @@
               </div>
             </div>
             <div class="column">
-              <img class="image-box border-shadow " src="https://anyshortcut.com/static/img/shortcut-keyboard.jpg" alt="">
             </div>
           </div>
         </div>
