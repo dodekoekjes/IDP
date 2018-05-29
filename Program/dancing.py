@@ -15,4 +15,5 @@ class Dancing(Observable):
         Observable.notifyObservers(self, arg)
 
     def command(self):
-        pass
+        print("test worked!")
+        self.notifyObservers()

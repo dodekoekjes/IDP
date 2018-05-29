@@ -1,14 +1,15 @@
-'''
+"""
 Based on Jesse Merritt's script:
 https://github.com/jes1510/python_dynamixels
 
 and Josue Alejandro Savage's Arduino library:
 http://savageelectronics.blogspot.it/2011/01/arduino-y-dynamixel-ax-12.html
-'''
+"""
 
 from time import sleep
 from serial import Serial
 import RPi.GPIO as GPIO
+
 
 class Ax12:
     # important AX-12 constants

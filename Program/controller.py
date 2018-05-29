@@ -5,7 +5,6 @@ from dancing import Dancing
 from controls import MovementControls
 from sound_recognition import SoundRecognition
 from util.observer import Observer
-import readchar
 
 
 class Controller(Observer):
@@ -13,8 +12,6 @@ class Controller(Observer):
     def __init__(self):
         """Creates all the modules"""
         print("class: Controller created.")
-
-        self.input = None
 
         self.arm = ArmControls()
         self.builder = Builder()
@@ -48,13 +45,13 @@ class Controller(Observer):
     def controls(self):
         """Command the controls"""
         while True:
-            user_input = input("pres a key:\n")
-            print("you typed: ", user_input)
-            user_input.lower()
+            user_input = input("\nType a command:\n")
+            print("\nyou typed: ", user_input)
+            user_input = user_input.lower()
 
             if user_input == "help" or user_input == "h" or user_input == "0":
                 self.input = user_input
-                self.commandsHelp()
+                self.commands_help(user_input)
             elif user_input == "arm" or user_input == "1":
                 self.arm.command()
             elif user_input == "builder" or user_input == "2":
@@ -69,14 +66,25 @@ class Controller(Observer):
                 self.sound.command()
             else:
                 self.input = user_input
-                self.commandsHelp()
-    def commandsHelp(self):
-        print("\nThere is no command: ", self.input, "\nCommands:\n"
-                                                     " [0] help"
-                                                     " [1] arm\n"
-                                                     " [2] builder\n"
-                                                     " [3] dancing\n"
-                                                     " [4] direction\n"
-                                                     " [5] movement\n"
-                                                     " [6] sound")
-        self.input = None
+                self.commands_help(user_input)
+
+    def commands_help(self, user_input):
+        if user_input == "help" or user_input == "h" or user_input == "0":
+            print("\nCommands:\n"
+                  " [0] help\n"
+                  " [1] arm\n"
+                  " [2] builder\n"
+                  " [3] dancing\n"
+                  " [4] direction\n"
+                  " [5] movement\n"
+                  " [6] sound")
+        else:
+            print("\nThere is no command: ", user_input,
+                  "\nCommands:\n"
+                  " [0] help\n"
+                  " [1] arm\n"
+                  " [2] builder\n"
+                  " [3] dancing\n"
+                  " [4] direction\n"
+                  " [5] movement\n"
+                  " [6] sound")
