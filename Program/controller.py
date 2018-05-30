@@ -13,6 +13,9 @@ class Controller(Observer):
         """Creates all the modules"""
         print("class: Controller created.")
 
+        self.stances = ["default", "arm", "build", "dance", "battle_stance", ""]
+        self.stance = "default"
+
         self.arm = ArmControls()
         self.builder = Builder()
         self.dancing = Dancing()
@@ -28,10 +31,12 @@ class Controller(Observer):
         self.movement.addObserver(self)
         self.sound.addObserver(self)
 
+        self.list = [ self.arm, self.builder, self.dancing, self.direction, self.movement, self.sound]
+
         # test
         # self.arm.notifyObservers()
         # self.builder.notifyObservers()
-        # self.dancing.notifyObservers()
+        self.dancing.notifyObservers()
         # self.direction.notifyObservers()
         # self.movement.notifyObservers()
         # self.sound.notifyObservers()
@@ -40,7 +45,8 @@ class Controller(Observer):
     def update(self, observable, arg):
         """Updates the modules"""
         print("Update executed")
-        print(observable, " : ", arg)
+        print(observable, "\narg:", arg)
+        print(observable.__class__)
 
     def controls(self):
         """Command the controls"""
@@ -50,7 +56,6 @@ class Controller(Observer):
             user_input = user_input.lower()
 
             if user_input == "help" or user_input == "h" or user_input == "0":
-                self.input = user_input
                 self.commands_help(user_input)
             elif user_input == "arm" or user_input == "1":
                 self.arm.command()
@@ -64,11 +69,14 @@ class Controller(Observer):
                 self.movement.command()
             elif user_input == "sound" or user_input == "6":
                 self.sound.command()
+            elif user_input == "exit" or user_input == "shutdown":
+                print("closing program...")
+                exit()
             else:
-                self.input = user_input
                 self.commands_help(user_input)
 
-    def commands_help(self, user_input):
+    @staticmethod
+    def commands_help(user_input):
         if user_input == "help" or user_input == "h" or user_input == "0":
             print("\nCommands:\n"
                   " [0] help\n"
@@ -88,3 +96,6 @@ class Controller(Observer):
                   " [4] direction\n"
                   " [5] movement\n"
                   " [6] sound")
+
+    def default_stance(self):
+        pass

@@ -15,3 +15,9 @@ class Builder(Observable):
 
     def command(self):
         pass
+
+    def construct(self):
+        pass
+
+    def deconstruct(self):
+        pass

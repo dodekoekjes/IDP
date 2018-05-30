@@ -17,3 +17,6 @@ class Dancing(Observable):
     def command(self):
         print("test worked!")
         self.notifyObservers()
+
+    def dance(self):
+        pass

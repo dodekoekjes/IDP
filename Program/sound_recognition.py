@@ -15,3 +15,6 @@ class SoundRecognition(Observable):
 
     def command(self):
         pass
+
+    def listen(self):
+        pass
