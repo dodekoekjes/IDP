@@ -137,9 +137,9 @@ class Arm3Link:
             x0=self.q,
             eqcons=[x_constraint,
                     y_constraint],
-            # uncomment to add in min / max angles for the joints
-            # ieqcons=[joint_limits_upper_constraint,
-            #          joint_limits_lower_constraint],
+            # min / max angles for the joints
+            ieqcons=[joint_limits_upper_constraint,
+                      joint_limits_lower_constraint],
             args=(xy,),
             iprint=0)  # iprint=0 suppresses output
 
