@@ -15,10 +15,10 @@ class Dancing(Observable):
         Observable.notifyObservers(self, arg)
 
     def command(self):
-        print("python2test worked!")
+        print("dancing command executed!")
         self.notifyObservers()
         result = call_python_version("2.7", "python2_test", "my_function", ["Mr", "Wolf"])
-        print(result)
+        print("python2.7 test:", result)
 
     def dance(self):
         pass

@@ -33,18 +33,19 @@ class Controller(Observer):
 
         self.list = [ self.arm, self.builder, self.dancing, self.direction, self.movement, self.sound]
 
-        # python2test
+        # test
         # self.arm.notifyObservers()
         # self.builder.notifyObservers()
-        self.dancing.notifyObservers()
+        # self.dancing.notifyObservers()
         # self.direction.notifyObservers()
         # self.movement.notifyObservers()
         # self.sound.notifyObservers()
+
         self.controls()
 
     def update(self, observable, arg):
         """Updates the modules"""
-        print("Update executed")
+        print("\nUpdate executed")
         print(observable, "\narg:", arg)
         print(observable.__class__)
 
@@ -69,7 +70,7 @@ class Controller(Observer):
                 self.movement.command()
             elif user_input == "sound" or user_input == "6":
                 self.sound.command()
-            elif user_input == "exit" or user_input == "shutdown":
+            elif user_input == "exit" or user_input == "shutdown" or user_input == ".":
                 print("closing program...")
                 exit()
             else:
@@ -83,7 +84,7 @@ class Controller(Observer):
                   " [1] arm\n"
                   " [2] builder\n"
                   " [3] dancing\n"
-                  " [4] direction\n"
+                  " [4] detection\n"
                   " [5] movement\n"
                   " [6] sound")
         else:
@@ -93,7 +94,7 @@ class Controller(Observer):
                   " [1] arm\n"
                   " [2] builder\n"
                   " [3] dancing\n"
-                  " [4] direction\n"
+                  " [4] detection\n"
                   " [5] movement\n"
                   " [6] sound")
 
