@@ -33,7 +33,7 @@ class Controller(Observer):
 
         self.list = [ self.arm, self.builder, self.dancing, self.direction, self.movement, self.sound]
 
-        # test
+        # python2test
         # self.arm.notifyObservers()
         # self.builder.notifyObservers()
         self.dancing.notifyObservers()
