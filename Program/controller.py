@@ -1,8 +1,8 @@
 from object_detection import ObjectDetection
-from controls import ArmControls
+from arm_controls import Arm
 from builder import Builder
 from dancing import Dancing
-from controls import MovementControls
+from movement import Movement
 from sound_recognition import SoundRecognition
 from util.observer import Observer
 
@@ -16,11 +16,11 @@ class Controller(Observer):
         self.stances = ["default", "arm", "build", "dance", "battle_stance", ""]
         self.stance = "default"
 
-        self.arm = ArmControls()
+        self.arm = Arm()
         self.builder = Builder()
         self.dancing = Dancing()
         self.direction = ObjectDetection()
-        self.movement = MovementControls()
+        self.movement = Movement()
         self.sound = SoundRecognition()
 
         # Add controller as observer to classes
@@ -31,7 +31,7 @@ class Controller(Observer):
         self.movement.addObserver(self)
         self.sound.addObserver(self)
 
-        self.list = [ self.arm, self.builder, self.dancing, self.direction, self.movement, self.sound]
+        self.list = [self.arm, self.builder, self.dancing, self.direction, self.movement, self.sound]
 
         # test
         # self.arm.notifyObservers()
@@ -86,7 +86,8 @@ class Controller(Observer):
                   " [3] dancing\n"
                   " [4] detection\n"
                   " [5] movement\n"
-                  " [6] sound")
+                  " [6] sound\n"
+                  " [.] exit/shutdown")
         else:
             print("\nThere is no command: ", user_input,
                   "\nCommands:\n"
@@ -96,7 +97,8 @@ class Controller(Observer):
                   " [3] dancing\n"
                   " [4] detection\n"
                   " [5] movement\n"
-                  " [6] sound")
+                  " [6] sound\n"
+                  " [.] exit/shutdown")
 
     def default_stance(self):
         pass

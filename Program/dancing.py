@@ -6,7 +6,6 @@ class Dancing(Observable):
     def __init__(self):
         """Init: super = Observable"""
         super().__init__()
-        self.outer = 0
         print("class: Dancing created.")
 
     def notifyObservers(self, arg=None):

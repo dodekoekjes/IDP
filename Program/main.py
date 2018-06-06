@@ -1,4 +1,4 @@
-from controller import Controller
+from .controller import Controller
 
 
 class Main:
@@ -12,6 +12,6 @@ class Main:
         Controller()
 
 
-main = Main()
-main.start()
+if __name__ == '__main__':
+    Main().start()
 

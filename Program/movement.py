@@ -4,9 +4,10 @@ import traceback
 import readchar
 import ax12
 # import execute
-from util.observer import Observable
+from .util.observer import Observable
 
-class MovementControls(Observable):
+
+class Movement(Observable):
     """Manages movement controls"""
 
     def __init__(self, num_legs=6, leg_joints=3):
@@ -300,38 +301,3 @@ class MovementControls(Observable):
             self.moveservo(self.servos[2], 400, speed)
             time.sleep(sleeptime)
             time.sleep(1)
-
-
-class ArmControls(Observable):
-    """Manages arm controls"""
-
-    def __init__(self):
-        """Init"""
-        super().__init__()
-        print("class: ArmControls created.")
-
-    def notifyObservers(self, arg=None):
-        """Notifies the observers"""
-        self.setChanged()
-        Observable.notifyObservers(self, arg)
-
-    def command(self):
-        pass
-
-    def move_x(self):
-        pass
-
-    def move_y(self):
-        pass
-
-    def move_z(self):
-        pass
-
-    def open_claw(self):
-        pass
-
-    def close_claw(self):
-        pass
-
-    def rotate_claw(self):
-        pass

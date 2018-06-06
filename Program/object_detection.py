@@ -1,5 +1,4 @@
 from util.observer import Observable
-from util.version_control import call_python_version
 
 
 class ObjectDetection(Observable):
@@ -15,5 +14,10 @@ class ObjectDetection(Observable):
         Observable.notifyObservers(self, arg)
 
     def command(self):
-        result = call_python_version("2.7", "test", "test", [1, 2, 3])
-        print(result)
+        # result = call_python_version("2.7", "test", "test", [1, 2, 3])
+        # print(result)
+
+        self.test()
+
+    def test(self):
+        print("do something here")
