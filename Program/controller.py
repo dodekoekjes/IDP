@@ -5,6 +5,7 @@ from dancing import Dancing
 from movement import Movement
 from sound_recognition import SoundRecognition
 from util.observer import Observer
+from bluetooth import connect
 
 
 class Controller(Observer):
@@ -15,6 +16,8 @@ class Controller(Observer):
 
         self.stances = ["default", "arm", "build", "dance", "battle_stance", ""]
         self.stance = "default"
+
+
 
         self.arm = Arm()
         self.builder = Builder()
@@ -33,21 +36,46 @@ class Controller(Observer):
 
         self.list = [self.arm, self.builder, self.dancing, self.direction, self.movement, self.sound]
 
-        # test
-        # self.arm.notifyObservers()
-        # self.builder.notifyObservers()
-        # self.dancing.notifyObservers()
-        # self.direction.notifyObservers()
-        # self.movement.notifyObservers()
-        # self.sound.notifyObservers()
+        # initialize bluetooth connection
+        self.host = connect.Connect(1, "host", "receive", "10:02:B5:C9:C3:5D", 4)
+        self.client = connect.Connect(2, "client", "send", "10:02:B5:C9:C3:5D", 5)
 
-        self.controls()
+        # start bluetooth connection
+        self.host.start()
+        self.client.start()
+
+        # self.controls()
 
     def update(self, observable, arg):
         """Updates the modules"""
         print("\nUpdate executed")
         print(observable, "\narg:", arg)
         print(observable.__class__)
+
+        if arg == "something not controller related":
+            print("do something else")
+        else:  # something controller related
+            self.execute(arg)
+            # self.host.read_output()
+
+    def execute(self, arg):
+        if arg == "arm":
+            self.arm.command()
+
+        elif arg == "builder":
+            self.builder.command()
+
+        elif arg == "dancing":
+            self.dancing.command()
+        elif arg == "direction":
+            self.direction.command()
+        elif arg == "movement":
+            self.movement.command()
+        elif arg == "sound":
+            self.sound.command()
+        elif arg == "exit":
+            print("closing program...")
+            exit()
 
     def controls(self):
         """Command the controls"""

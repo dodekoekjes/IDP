@@ -2,9 +2,9 @@ import sys
 import time
 import traceback
 import readchar
-import ax12
+# import ax12
 # import execute
-from .util.observer import Observable
+from util.observer import Observable
 
 
 class Movement(Observable):
@@ -67,7 +67,7 @@ class Movement(Observable):
             time.sleep(1)
 
             for i in range(13):
-                print("Servo " + str(i + 1) + ": " + str(ax12.Ax12().readPosition(i + 1)))
+                print()  # print("Servo " + str(i + 1) + ": " + str(ax12.Ax12().readPosition(i + 1)))
 
     # Dab
     def dab(self, times=3):
@@ -251,7 +251,7 @@ class Movement(Observable):
 
         def moveservo(self, servo_idx, angle, speed):
             try:
-                ax12.Ax12().moveSpeed(servo_idx, angle, speed)
+                #ax12.Ax12().moveSpeed(servo_idx, angle, speed)
                 time.sleep(0.0002)
             except IndexError:
                 print(str(servo_idx) + " Out of range")
