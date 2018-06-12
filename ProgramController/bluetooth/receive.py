@@ -10,6 +10,7 @@ class Receive(Observable):
         self.port = port
         self.backlog = backlog
         self.size = size
+        self.data = None
 
     def notifyObservers(self, arg=None):
         """Notifies the Observers"""
@@ -30,6 +31,7 @@ class Receive(Observable):
                 if data:
                     print(data)
                     client.send(data)
+                    self.data = data
                     if str(data) == "quit":
                         raise Exception("received: quit")
                     else:
@@ -41,6 +43,10 @@ class Receive(Observable):
             except NameError:
                 print("ERROR: Connection terminated")
             s.close()
+
+    def callback(self):
+        """calls the received data"""
+        return ""
 
 
 if __name__ == '__main__':
