@@ -1,5 +1,5 @@
 import socket
-from utils.observer import Observable
+from util.observer import Observable
 
 
 class Receive(Observable):
@@ -43,10 +43,6 @@ class Receive(Observable):
             except NameError:
                 print("ERROR: Connection terminated")
             s.close()
-
-    def callback(self):
-        """calls the received data"""
-        return ""
 
 
 if __name__ == '__main__':

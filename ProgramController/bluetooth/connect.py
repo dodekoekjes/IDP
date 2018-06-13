@@ -5,7 +5,7 @@ from .send import Send
 
 
 class Connect(threading.Thread):
-    def __init__(self, threadID, name, param: str, mac_address: str, port: int):
+    def __init__(self, threadID, name, param: str, mac_address: str, port: int, klass):
         """Interact with another bluetooth device using multi-threading"""
         super().__init__()
         self.threadID = threadID
@@ -15,6 +15,7 @@ class Connect(threading.Thread):
         self.port = port
         self.send = None
         self.host = None
+        self.klass = klass
 
     def run(self):
         """Do something when thread starts"""
@@ -26,6 +27,7 @@ class Connect(threading.Thread):
             # self.connection.console()  # don't forget to comment this out
         elif self.param == "receive":
             self.host = Receive(self.macc_address, self.port)
+            self.host.addObserver(self.klass)
             self.host.start()
         else:
             print("you did not select the proper command\nCommands\n -- send\n -- receive")

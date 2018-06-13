@@ -49,10 +49,9 @@ class Input():
 
     def read(self, args=None):
         """Returns nputs"""
-        values = [self.vrx_pos1, self.vry_pos1, self.b_pressed1, self.vrx_pos2, self.vry_pos2, self.b_pressed2]
-        printinput.PrintInput(3, "print", self.vrx_pos1, self.vry_pos1, self.b_pressed1, self.vrx_pos2, self.vry_pos2, self.b_pressed2, 0.5).start()
         if args == "dev":
-            return values
+            print("you are in development mode.")
+            return [self.vrx_pos1, self.vry_pos1, self.b_pressed1, self.vrx_pos2, self.vry_pos2, self.b_pressed2]
         else:
             # Determine position
             # Joystick 1
@@ -78,6 +77,22 @@ class Input():
             if GPIO.input(self.b_pin2) == GPIO.LOW and self.b_pressed2:
                 self.b_pressed2 = False
                 print("Button 2 released\npin :", self.b_pin2)
+
             # output
-            printinput.PrintInput(3, "print", self.vrx_pos1, self.vry_pos1, self.b_pressed1, self.vrx_pos2, self.vry_pos2, self.b_pressed2, 0.5).start()
+            print(
+                "Joystick 1:"
+                "VRx : {}  "
+                "VRy : {}  "
+                "pressed : {}  "
+                "Joystick 2:"
+                "VRx : {}  "
+                "VRy : {}  "
+                "pressed : {}".format(
+                    self.vrx_pos1,
+                    self.vry_pos1,
+                    self.b_pressed1,
+                    self.vrx_pos2,
+                    self.vry_pos2,
+                    self.b_pressed2))
+            values = [self.vrx_pos1, self.vry_pos1, self.b_pressed1, self.vrx_pos2, self.vry_pos2, self.b_pressed2]
             return values
