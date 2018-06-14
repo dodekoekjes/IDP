@@ -79,21 +79,21 @@ class Input():
                 print("Button 2 released\npin :", self.b_pin2)
 
             # output
-            # print(
-            #     "Joystick 1:"
-            #     "VRx : {}  "
-            #     "VRy : {}  "
-            #     "pressed : {}  "
-            #     "Joystick 2:"
-            #     "VRx : {}  "
-            #     "VRy : {}  "
-            #     "pressed : {}".format(
-            #         self.vrx_pos1,
-            #         self.vry_pos1,
-            #         self.b_pressed1,
-            #         self.vrx_pos2,
-            #         self.vry_pos2,
-            #         self.b_pressed2))
+            print(
+                "Joystick 1:"
+                "VRx : {}  "
+                "VRy : {}  "
+                "pressed : {}  "
+                "Joystick 2:"
+                "VRx : {}  "
+                "VRy : {}  "
+                "pressed : {}".format(
+                    self.vrx_pos1,
+                    self.vry_pos1,
+                    self.b_pressed1,
+                    self.vrx_pos2,
+                    self.vry_pos2,
+                    self.b_pressed2))
             values = [self.vrx_pos1, self.vry_pos1, self.b_pressed1, self.vrx_pos2, self.vry_pos2, self.b_pressed2]
 
             return values

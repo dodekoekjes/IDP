@@ -30,7 +30,7 @@ class Controller(Observer):
 
     def controls(self):
         while True:
-            command = None
+            command = []
             self.controller_input = CI()
             # add "dev" to run on computer
             if self.stance == "manual":
@@ -151,13 +151,14 @@ class Controller(Observer):
                 joyval_float2_y = MULTIPLIER * y2 -1
 
                 command = ["manual", joyval_float1_x, joyval_float1_y, b1, joyval_float2_x, joyval_float2_y, b2]
+                print("Command:")
+                for item in command:
+                    print("-- " + item)
 
 
 
                 # testing
                 print(x1, y1, b1, x2, y2, b2)
-            elif self.stance in self.stances:
-                command = self.stance
 
             self.client.command(command)
 
