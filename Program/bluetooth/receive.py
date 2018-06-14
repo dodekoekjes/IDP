@@ -37,7 +37,7 @@ class Receive(Observable):
                 data = client.recv(self.size)
                 if data:
                     print("raw",data)
-                    client.send(data)
+                    # client.send(data)
                     self.data = self.convert(data)
 
                     if str(data) == "quit":
@@ -77,7 +77,7 @@ class Receive(Observable):
             for _ in range(len):
                 arr2.append(arr_bytes[offset])
                 offset += 1
-            print(struct.unpack(vtype2, arr2)[0])
+            # print(struct.unpack(vtype2, arr2)[0])
             arr.append(struct.unpack(vtype2, arr2)[0])
 
         return arr
