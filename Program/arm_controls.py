@@ -1,5 +1,5 @@
 from util.observer import Observable
-import arm
+# import arm
 # import ax12
 
 
@@ -9,7 +9,7 @@ class Arm(Observable):
         """Init: super = Observable"""
         super().__init__()
         print("class: Dancing created.")
-        self.arm = arm.Arm3Link()
+        # self.arm = arm.Arm3Link()
 
     def notifyObservers(self, arg=None):
         """Notifies the observers"""
@@ -21,12 +21,12 @@ class Arm(Observable):
         self.notifyObservers()
 
         # replace test to proper function name
-        self.test()
+        # self.test()
         # ----------
 
         # result = call_python_version("2.7", "python2_test", "my_function", ["Mr", "Wolf"])
         # print("python2.7 test:", result)
 
-    def test(self):
-        # replace test() for real code
-        arm.test()
+    # def test(self):
+    #     # replace test() for real code
+    #     arm.test()
