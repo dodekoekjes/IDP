@@ -12,12 +12,20 @@ class Send:
             self.s.connect((self.server_m_a_c_address, self.port))
         except OSError as e:
             print("ERROR: -> init", e.args)
+            self.retry()
 
         self.INT = 0x00
         self.UINT = 0x01
         self.STR = 0x02
         self.BOOL = 0x03
         self.FLOAT = 0x04
+
+    def retry(self):
+        try:
+            self.s.connect((self.server_m_a_c_address, self.port))
+        except OSError as e:
+            print("ERROR:", e.args, "\nTrying to reconnect...")
+            self.retry()
 
     def controller_input(self, arg):
         """Sends controller input"""
