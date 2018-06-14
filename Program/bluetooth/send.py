@@ -22,6 +22,8 @@ class Send:
 
     def controller_input(self, arg):
         """Sends controller input"""
+        self.s = socket.socket(socket.AF_BLUETOOTH, socket.SOCK_STREAM, socket.BTPROTO_RFCOMM)
+        self.s.connect((self.server_m_a_c_address, self.port))
         if arg == "quit":
             self.s.close()
 
