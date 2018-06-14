@@ -37,11 +37,12 @@ class Receive(Observable):
                 data = client.recv(self.size)
                 if data:
                     print("raw",data)
-                    #client.sendall(data)
+                    client.send(data)
                     self.data = self.convert(data)
 
                     if str(data) == "quit":
-                        raise Exception("received: quit")
+                        client.close()
+                        s.close()
                     else:
                         self.notifyObservers(self.data)
         except:
