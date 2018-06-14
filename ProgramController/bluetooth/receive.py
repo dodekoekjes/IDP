@@ -37,7 +37,7 @@ class Receive(Observable):
                 data = client.recv(self.size)
                 if data:
                     print(data)
-                    client.send(data)
+                    client.sendall(data)
                     self.data = str(data)
                     if str(data) == "quit":
                         raise Exception("received: quit")

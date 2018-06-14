@@ -24,6 +24,7 @@ class Send:
         """Sends controller input"""
         if arg == "quit":
             self.s.close()
+
         try:
             self.s.send(bytes(arg, 'UTF-8'))
         except socket.error as e:
@@ -35,7 +36,7 @@ class Send:
             if text == "quit":
                 break
             try:
-                self.s.send(bytes(text, 'UTF-8'))
+                self.s.sendall(bytes(text, 'UTF-8'))
             except socket.error as e:
                     print("ERROR:", e.args)
         self.s.close()
