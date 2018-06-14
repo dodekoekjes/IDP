@@ -16,11 +16,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="controller.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="controller.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/controller.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="314">
-              <caret line="99" column="33" selection-start-line="99" selection-start-column="33" selection-end-line="99" selection-end-column="33" />
+            <state relative-caret-position="156">
+              <caret line="102" column="22" selection-start-line="102" selection-start-column="22" selection-end-line="102" selection-end-column="22" />
               <folding>
                 <element signature="e#0#44#0" expanded="true" />
               </folding>
@@ -61,10 +61,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="receive.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="receive.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bluetooth/receive.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="666">
+            <state relative-caret-position="801">
               <caret line="79" column="14" selection-start-line="79" selection-start-column="14" selection-end-line="79" selection-end-column="14" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
@@ -137,6 +137,7 @@
     <findStrings>
       <find>movespeed</find>
       <find>read</find>
+      <find>raw</find>
     </findStrings>
   </component>
   <component name="IdeDocumentHistory">
@@ -184,10 +185,10 @@
         <option value="$PROJECT_DIR$/arm_controls.py" />
         <option value="$PROJECT_DIR$/movement.py" />
         <option value="$PROJECT_DIR$/util/version_control.py" />
-        <option value="$PROJECT_DIR$/controller.py" />
         <option value="$PROJECT_DIR$/bluetooth/send.py" />
         <option value="$PROJECT_DIR$/bluetooth/connect.py" />
         <option value="$PROJECT_DIR$/bluetooth/receive.py" />
+        <option value="$PROJECT_DIR$/controller.py" />
       </list>
     </option>
   </component>
@@ -663,16 +664,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controller.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="99" column="33" selection-start-line="99" selection-start-column="33" selection-end-line="99" selection-end-column="33" />
-          <folding>
-            <element signature="e#0#44#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/bluetooth/send.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="381">
@@ -685,10 +676,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/bluetooth/receive.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="666">
+        <state relative-caret-position="801">
           <caret line="79" column="14" selection-start-line="79" selection-start-column="14" selection-end-line="79" selection-end-column="14" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controller.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="156">
+          <caret line="102" column="22" selection-start-line="102" selection-start-column="22" selection-end-line="102" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#44#0" expanded="true" />
           </folding>
         </state>
       </provider>

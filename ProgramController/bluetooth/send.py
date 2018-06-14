@@ -11,7 +11,7 @@ class Send:
             self.s = socket.socket(socket.AF_BLUETOOTH, socket.SOCK_STREAM, socket.BTPROTO_RFCOMM)
             self.s.connect((self.server_m_a_c_address, self.port))
         except OSError as e:
-            print("ERROR:", e.args)
+            print("ERROR: -> init", e.args)
 
         self.INT = 0x00
         self.UINT = 0x01
@@ -26,7 +26,7 @@ class Send:
         try:
             self.s.send(self.convert(arg))
         except socket.error as e:
-            print("ERROR:", e.args)
+            print("ERROR: -> send", e.args)
 
     def console(self):
         while 1:

@@ -100,12 +100,14 @@ class Controller(Observer):
             print("closing program...")
             exit()
 
-    def joystick_controls(self, args):
+    def joystick_contsrols(self, args):
         """Commands the controls"""
         joyval_float1_x = args[1]
         joyval_float1_y = args[2]
-        joyval_float2_x = args[3]
-        joyval_float2_y = args[4]
+        button1 = args[3]
+        joyval_float2_x = args[4]
+        joyval_float2_y = args[5]
+        button2 = args[6]
 
 
         self.speed1_x = abs(200*joyval_float1_x)

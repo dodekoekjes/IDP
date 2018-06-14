@@ -11,7 +11,7 @@ class Controller(Observer):
 
         # setup host
         self.host = connect.Connect(1, "host", "receive", 'B8:27:EB:DE:5F:36', 5, klass=self)
-
+        time.sleep(20)
         # setup client
         self.client = connect.Connect(2, "client", "send", 'B8:27:EB:36:3E:F8', 4, klass=self)
 
@@ -25,7 +25,6 @@ class Controller(Observer):
         """Starts modules and components"""
         # Start new threads
         self.host.start()
-        time.sleep(20)
         self.client.start()
         self.controls()
 
@@ -151,7 +150,7 @@ class Controller(Observer):
                 joyval_float2_x = MULTIPLIER * x2 - 1
                 joyval_float2_y = MULTIPLIER * y2 -1
 
-                command = ["manual", joyval_float1_x, joyval_float1_y, joyval_float2_x, joyval_float2_y]
+                command = ["manual", joyval_float1_x, joyval_float1_y, b1, joyval_float2_x, joyval_float2_y, b2]
 
 
 
