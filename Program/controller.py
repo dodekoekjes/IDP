@@ -5,7 +5,7 @@ from dancing import Dancing
 from movement import Movement
 from sound_recognition import SoundRecognition
 from util.observer import Observer
-from bluetooth import connect
+from bluetooth_connection import connect
 import time
 
 
@@ -41,12 +41,12 @@ class Controller(Observer):
 
         self.list = [self.arm, self.builder, self.dancing, self.direction, self.movement, self.sound]
 
-        # initialize bluetooth connection
+        # initialize bluetooth_connection connection
         self.host = connect.Connect(1, "host", "receive", 'B8:27:EB:36:3E:F8', 4, klass=self)
         time.sleep(10)
         self.client = connect.Connect(2, "client", "send", 'B8:27:EB:DE:5F:36', 5, klass=self)
 
-        # start bluetooth connection
+        # start bluetooth_connection connection
         self.host.start()
         self.client.start()
 

@@ -1,4 +1,4 @@
-from bluetooth import *
+from bluetooth_connection import *
 import struct
 import time
 import sys
@@ -15,7 +15,7 @@ class Send:
         self.addr = None
 
         if len(sys.argv) < 2:
-            print("no device specified.  Searching all nearby bluetooth devices for")
+            print("no device specified.  Searching all nearby bluetooth_connection devices for")
             print("the Controller service")
         else:
             self.addr = sys.argv[1]

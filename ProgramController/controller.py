@@ -1,4 +1,4 @@
-from bluetooth import connect
+from bluetooth_connection import connect
 from util.observer import Observer
 from input import Input as CI
 import time
