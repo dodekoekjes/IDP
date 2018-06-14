@@ -59,6 +59,21 @@ class Controller(Observer):
         print(observable, "\narg:", arg)
         print(observable.__class__)
 
+        if arg[0] == 0:
+            arg[0] = "manual"
+        elif arg[0] == 1:
+            arg[0] = "battlestance"
+        elif arg[0] == 2:
+            arg[0] = "dab"
+        elif arg[0] == 3:
+            arg[0] = "ball"
+        elif arg[0] == 4:
+            arg[0] = "reset"
+        elif arg[0] == 5:
+            arg[0] = "dance"
+
+        print("arg[0] converted:", arg[0])
+
         if not self.using_joysticks:
             self.args.join(arg+"|")
             if arg[0] == "manual":
@@ -91,6 +106,7 @@ class Controller(Observer):
         joyval_float1_y = args[2]
         joyval_float2_x = args[3]
         joyval_float2_y = args[4]
+
 
         self.speed1_x = abs(200*joyval_float1_x)
         self.speed1_y = abs(200*joyval_float1_y)

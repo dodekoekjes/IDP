@@ -21,12 +21,10 @@ class Send:
 
     def controller_input(self, arg):
         """Sends controller input"""
-        if isinstance(arg, str):
-            self.s.send()
-        elif arg == "quit":
+        if arg[0] == "quit" or arg == "quit":
             self.s.close()
         try:
-            self.s.send(arg)
+            self.s.send(self.convert(arg))
         except socket.error as e:
             print("ERROR:", e.args)
 
@@ -41,8 +39,21 @@ class Send:
                     print("ERROR:", e.args)
         self.s.close()
 
-    def convert(self):
-        arr = [1, 2, 3, 4, True, 0.871]
+    def convert(self, arg):
+        if arg[0] == "manual":
+            arg[0] = 0
+        elif arg[0] =="battlestance":
+            arg[0] = 1
+        elif arg[0] == "dab":
+            arg[0] = 2
+        elif arg[0] == "ball":
+            arg[0] = 3
+        elif arg[0] == "reset":
+            arg[0] = 4
+        elif arg[0] == "dance":
+            arg[0] = 5
+
+        arr = arg
         arr_bytes = bytearray()
         for v in arr:
             # print(type(v) is bool)

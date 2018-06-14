@@ -18,7 +18,7 @@ class Controller(Observer):
         self.controller_input = None
         self.args = []
         self.stance = "manual"
-        self.stances = ["manual", "dance", "battlestance", "dab"]
+        self.stances = ["manual", "dance", "battlestance", "dab", "reset"]
         self.start()
 
     def start(self):
@@ -151,8 +151,7 @@ class Controller(Observer):
                 joyval_float2_x = MULTIPLIER * x2 - 1
                 joyval_float2_y = MULTIPLIER * y2 -1
 
-                self.client.command("manual")
-                command = [joyval_float1_x, joyval_float1_y, joyval_float2_x, joyval_float2_y]
+                command = ["manual", joyval_float1_x, joyval_float1_y, joyval_float2_x, joyval_float2_y]
 
 
 
@@ -166,7 +165,20 @@ class Controller(Observer):
     def update(self, observable, arg):
         """updates the modules"""
         print(observable, "argument:", arg)
-        arg = str(arg)
-        if arg in self.stances:
-            self.stance = arg
+
+        if arg[0] == 0:
+            arg[0] = "manual"
+        elif arg[0] == 1:
+            arg[0] = "battlestance"
+        elif arg[0] == 2:
+            arg[0] = "dab"
+        elif arg[0] == 3:
+            arg[0] = "ball"
+        elif arg[0] == 4:
+            arg[0] = "reset"
+        elif arg[0] == 5:
+            arg[0] = "dance"
+
+        if arg[0] in self.stances:
+            self.stance = arg[0]
         self.args.append(arg)

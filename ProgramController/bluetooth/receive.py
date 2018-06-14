@@ -38,11 +38,11 @@ class Receive(Observable):
                 if data:
                     print(data)
                     client.send(data)
-                    self.data = data
+                    self.data = self.convert(data)
                     if str(data) == "quit":
                         raise Exception("received: quit")
                     else:
-                        self.notifyObservers(data)
+                        self.notifyObservers(self.data)
         except:
             print("\nClosing socket..")
             try:
@@ -51,9 +51,9 @@ class Receive(Observable):
                 print("ERROR: Connection terminated")
             s.close()
 
-    def convert(self):
+    def convert(self, data):
         offset = 0
-        arr_bytes = bytearray()
+        arr_bytes = data
         arr = []
 
         for _ in range(6):
