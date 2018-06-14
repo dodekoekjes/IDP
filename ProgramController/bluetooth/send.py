@@ -28,6 +28,7 @@ class Send:
         data = self.convert(arg)
         try:
             self.s.send(data)
+            self.s.rec
         except socket.error as e:
             print("ERROR: -> send", e.args)
 

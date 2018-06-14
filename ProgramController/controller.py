@@ -29,7 +29,6 @@ class Controller(Observer):
         self.controls()
 
     def controls(self):
-        while True:
             command = []
             self.controller_input = CI()
             # add "dev" to run on computer
@@ -59,7 +58,7 @@ class Controller(Observer):
                 forward2 = False
                 backward2 = False
 
-                if 600 < x1 < 1200:  # X+
+                if 600 < x1 < 1023:  # X+
                     # move right
                     right1 = True
 
@@ -67,7 +66,7 @@ class Controller(Observer):
                     # move left
                     left1 = True
 
-                if 600 < y1 < 1200:  # Y+
+                if 600 < y1 < 1023:  # Y+
                     # move forward
                     forward1 = True
 
@@ -75,7 +74,7 @@ class Controller(Observer):
                     # move backward
                     backward1 = True
 
-                if 600 < x2 < 1200:  # X+
+                if 600 < x2 < 1023:  # X+
                     # move right
                     right2 = True
 
@@ -83,7 +82,7 @@ class Controller(Observer):
                     # move left
                     left2 = True
 
-                if 600 < y2 < 1200:  # Y+
+                if 600 < y2 < 1023:  # Y+
                     # move forward
                     forward2 = True
                 elif 0 < y2 < 423:  # Y-
@@ -166,18 +165,8 @@ class Controller(Observer):
         """updates the modules"""
         print(observable, "argument:", arg)
 
-        if arg[0] == 0:
-            arg[0] = "manual"
-        elif arg[0] == 1:
-            arg[0] = "battlestance"
-        elif arg[0] == 2:
-            arg[0] = "dab"
-        elif arg[0] == 3:
-            arg[0] = "ball"
-        elif arg[0] == 4:
-            arg[0] = "reset"
-        elif arg[0] == 5:
-            arg[0] = "dance"
+        if arg == "received":
+            self.controls()
 
         if arg[0] in self.stances:
             self.stance = arg[0]

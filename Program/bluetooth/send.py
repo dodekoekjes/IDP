@@ -20,21 +20,9 @@ class Send:
         self.BOOL = 0x03
         self.FLOAT = 0x04
 
-    def retry(self):
-        try:
-            self.s.connect((self.server_m_a_c_address, self.port))
-        except OSError as e:
-            print("ERROR:", e.args, "\nTrying to reconnect...")
-            count = 0
-            while count < 10:
-                print(10-count)
-                count += 1
-                time.sleep(1)
-            return self.retry()
-
     def controller_input(self, arg):
         """Sends controller input"""
-        if arg[0] == "quit":
+        if arg == "quit":
             self.s.close()
         try:
             self.s.send(bytes(arg, 'UTF-8'))

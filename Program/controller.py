@@ -50,8 +50,13 @@ class Controller(Observer):
         self.host.start()
         self.client.start()
 
+        self.msg_received = False
+
         # # self.controls()
         # self.joystick_controls()
+
+    def has_received(self):
+        self.client.command("received")
 
     def update(self, observable, arg):
         """Updates the modules"""
@@ -71,6 +76,8 @@ class Controller(Observer):
             arg[0] = "reset"
         elif arg[0] == 5:
             arg[0] = "dance"
+
+        self.has_received()
 
         print("arg[0] converted:", arg[0])
 
