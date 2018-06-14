@@ -1,5 +1,6 @@
 import socket
 import struct
+import time
 
 
 class Send:
@@ -24,6 +25,11 @@ class Send:
             self.s.connect((self.server_m_a_c_address, self.port))
         except OSError as e:
             print("ERROR:", e.args, "\nTrying to reconnect...")
+            count = 0
+            while count < 10:
+                print(10-count)
+                count += 1
+                time.sleep(1)
             self.retry()
 
     def controller_input(self, arg):
