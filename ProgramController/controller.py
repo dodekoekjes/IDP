@@ -10,17 +10,15 @@ class Controller(Observer):
         """Creates all the modules"""
 
         # setup host
-        self.host = connect.Connect(1, "host", "receive", '10:02:B5:C9:C3:5D', 4, klass=self)
+        self.host = connect.Connect(1, "host", "receive", 'B8:27:EB:DE:5F:36', 5, klass=self)
 
         # setup client
-        self.client = connect.Connect(2, "client", "send", '40:2C:F4:E3:63:61', 5, klass=self)
+        self.client = connect.Connect(2, "client", "send", 'B8:27:EB:36:3E:F8', 4, klass=self)
 
         self.controller_input = None
         self.args = []
         self.stance = "manual"
         self.stances = ["manual", "dance", "battlestance", "dab"]
-
-
         self.start()
 
     def start(self):
@@ -148,11 +146,15 @@ class Controller(Observer):
 
 
                 ## Multiply afformentioned position by the MULTIPLIER and subtract 1
-                joyval_float1 = MULTIPLIER * speed1 - 1
-                joyval_float2 = MULTIPLIER * speed2 - 1
+                joyval_float1_x = MULTIPLIER * x1 - 1
+                joyval_float1_y = MULTIPLIER * y1 - 1
+                joyval_float2_x = MULTIPLIER * x2 - 1
+                joyval_float2_y = MULTIPLIER * y2 -1
 
                 self.client.command("manual")
-                command = [right1, left1, forward1, backward1, right2, left2, forward2, backward2, speed1, speed2, speed1_percentage, speed2_percentage, joyval_float1, joyval_float2]
+                command = [joyval_float1_x, joyval_float1_y, joyval_float2_x, joyval_float2_y]
+
+
 
                 # testing
                 print(x1, y1, b1, x2, y2, b2)

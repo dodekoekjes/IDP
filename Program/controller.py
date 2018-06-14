@@ -20,8 +20,10 @@ class Controller(Observer):
 
         self.args = "|"
         self.using_joysticks = False
-        self.speed1 = 0
-        self.speed2 = 0
+        self.speed1_x = 0
+        self.speed1_y = 0
+        self.speed2_x = 0
+        self.speed2_y = 0
         self.arm = Arm()
         self.builder = Builder()
         self.dancing = Dancing()
@@ -40,16 +42,16 @@ class Controller(Observer):
         self.list = [self.arm, self.builder, self.dancing, self.direction, self.movement, self.sound]
 
         # initialize bluetooth connection
-        self.host = connect.Connect(1, "host", "receive", "10:02:B5:C9:C3:5D", 4, klass=self)
+        self.host = connect.Connect(1, "host", "receive", 'B8:27:EB:36:3E:F8', 4, klass=self)
         time.sleep(20)
-        self.client = connect.Connect(2, "client", "send", "10:02:B5:C9:C3:5D", 5, klass=self)
+        self.client = connect.Connect(2, "client", "send", 'B8:27:EB:DE:5F:36', 5, klass=self)
 
         # start bluetooth connection
         self.host.start()
         self.client.start()
 
-        # self.controls()
-        self.joystick_controls()
+        # # self.controls()
+        # self.joystick_controls()
 
     def update(self, observable, arg):
         """Updates the modules"""
@@ -59,10 +61,10 @@ class Controller(Observer):
 
         if not self.using_joysticks:
             self.args.join(arg+"|")
-            if arg == "manual":
+            if arg[0] == "manual":
                 self.using_joysticks = True
-            else:  # something controller related
-                self.execute(arg)
+            else:
+                self.execute(arg[0])
         else:
             self.joystick_controls(arg)
 
@@ -85,48 +87,15 @@ class Controller(Observer):
 
     def joystick_controls(self, args):
         """Commands the controls"""
-        right1 = args[0]
-        left1 = args[1]
-        forward1 = args[2]
-        backward1 = args[3]
+        joyval_float1_x = args[1]
+        joyval_float1_y = args[2]
+        joyval_float2_x = args[3]
+        joyval_float2_y = args[4]
 
-        right2 = args[4]
-        left2 = args[5]
-        forward2 = args[6]
-        backward2 = args[7]
-
-        speed1 = args[8]
-        speed2 = args[9]
-        persentage1 = args[10]
-        persentage2 = args[11]
-        joyval_float1 = args[12]
-        joyval_float2 = args[13]
-
-        # convert joystick percentages to servo movespeed
-        self.speed1 = 200*(persentage1/100)
-        self.speed2 = 200*(persentage2/100)
-
-        # if right1 and forward1:
-        # # move right-forward
-        #
-        # elif right1 and backward1:
-        # # move right-backward
-        #
-        # elif left1 and forward1:
-        # # move left-forward
-        # elif left1 and backward1:
-        # # move left backward
-        #
-        # if right2 and forward2:
-        # # move right-forward
-        #
-        # elif right2 and backward2:
-        # # move right-backward
-        #
-        # elif left2 and forward2:
-        # # move left-forward
-        # elif left2 and backward2:
-        # # move left backward
+        self.speed1_x = abs(200*joyval_float1_x)
+        self.speed1_y = abs(200*joyval_float1_y)
+        self.speed2_x = abs(200*joyval_float2_x)
+        self.speed2_y = abs(200*joyval_float2_y)
         for arg in args:
             print("--", arg)
 

@@ -1,5 +1,6 @@
 import socket
 from util.observer import Observable
+import struct
 
 
 class Receive(Observable):
@@ -11,6 +12,12 @@ class Receive(Observable):
         self.backlog = backlog
         self.size = size
         self.data = None
+
+        self.INT = 0x00
+        self.UINT = 0x01
+        self.STR = 0x02
+        self.BOOL = 0x03
+        self.FLOAT = 0x04
 
     def notifyObservers(self, arg=None):
         """Notifies the Observers"""
@@ -43,6 +50,36 @@ class Receive(Observable):
             except NameError:
                 print("ERROR: Connection terminated")
             s.close()
+
+    def convert(self):
+        offset = 0
+        arr_bytes = bytearray()
+        arr = []
+
+        for _ in range(6):
+            arr2 = bytearray()
+            vtype = arr_bytes[offset]
+            vtype2 = ""
+            len = 0
+            offset += 1
+
+            if vtype == self.INT:
+                len = 4
+                vtype2 = "<i"
+            elif vtype == self.BOOL:
+                len = 1
+                vtype2 = "?"
+            elif vtype == self.FLOAT:
+                len = 4
+                vtype2 = "<f"
+
+            for _ in range(len):
+                arr2.append(arr_bytes[offset])
+                offset += 1
+            print(struct.unpack(vtype2, arr2)[0])
+            arr.append(struct.unpack(vtype2, arr2)[0])
+
+        return arr
 
 
 if __name__ == '__main__':

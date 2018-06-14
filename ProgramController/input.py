@@ -36,10 +36,10 @@ class Input():
         self.spi.max_speed_hz = 1350000
 
         # dev
-        self.vrx_pos1 = "[PLACEHOLDER]"
-        self.vry_pos1 = "[PLACEHOLDER]"
-        self.vrx_pos2 = "[PLACEHOLDER]"
-        self.vry_pos2 = "[PLACEHOLDER]"
+        self.vrx_pos1 = 1234
+        self.vry_pos1 = 1234
+        self.vrx_pos2 = 1234
+        self.vry_pos2 = 1234
 
     def read_channel(self, channel):
         val = self.spi.xfer2([1, (8 + channel) << 4, 0])
@@ -95,4 +95,5 @@ class Input():
                     self.vry_pos2,
                     self.b_pressed2))
             values = [self.vrx_pos1, self.vry_pos1, self.b_pressed1, self.vrx_pos2, self.vry_pos2, self.b_pressed2]
+
             return values

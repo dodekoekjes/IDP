@@ -1,4 +1,5 @@
 import socket
+import struct
 
 
 class Send:
@@ -12,12 +13,20 @@ class Send:
         except OSError as e:
             print("ERROR:", e.args)
 
+        self.INT = 0x00
+        self.UINT = 0x01
+        self.STR = 0x02
+        self.BOOL = 0x03
+        self.FLOAT = 0x04
+
     def controller_input(self, arg):
         """Sends controller input"""
-        if arg == "quit":
+        if isinstance(arg, str):
+            self.s.send()
+        elif arg == "quit":
             self.s.close()
         try:
-            self.s.send(bytes(arg, 'UTF-8'))
+            self.s.send(arg)
         except socket.error as e:
             print("ERROR:", e.args)
 
@@ -31,6 +40,30 @@ class Send:
             except socket.error as e:
                     print("ERROR:", e.args)
         self.s.close()
+
+    def convert(self):
+        arr = [1, 2, 3, 4, True, 0.871]
+        arr_bytes = bytearray()
+        for v in arr:
+            # print(type(v) is bool)
+            vtype = ""
+            if type(v) is int:
+                vtype = "<i"
+                arr_bytes.append(self.INT)
+            elif type(v) is bool:
+                vtype = "?"
+                arr_bytes.append(self.BOOL)
+            elif type(v) is float:
+                vtype = "<f"
+                arr_bytes.append(self.FLOAT)
+
+            val = struct.pack(vtype, v)
+            for b in val:
+                arr_bytes.append(b)
+
+        print(arr_bytes)
+
+        return arr_bytes
 
 
 if __name__ == '__main__':
