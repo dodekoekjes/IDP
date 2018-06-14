@@ -36,7 +36,7 @@ class Send:
             if text == "quit":
                 break
             try:
-                self.s.sendall(bytes(text, 'UTF-8'))
+                self.s.send(bytes(text, 'UTF-8'))
             except socket.error as e:
                     print("ERROR:", e.args)
         self.s.close()
