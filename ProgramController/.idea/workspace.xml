@@ -52,7 +52,7 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="send.py" pinned="false" current-in-tab="true">
+          <file leaf-file-name="send.py" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/bluetooth_connection/send.py">
               <provider selected="true" editor-type-id="text-editor">
                 <state>
@@ -73,11 +73,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="controller.py" pinned="false" current-in-tab="false">
+          <file leaf-file-name="controller.py" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/controller.py">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="-548">
-                  <caret line="84" column="34" selection-start-line="84" selection-start-column="34" selection-end-line="84" selection-end-column="34" />
+                <state relative-caret-position="330">
+                  <caret line="22" column="23" selection-start-line="22" selection-start-column="23" selection-end-line="22" selection-end-column="23" />
                   <folding>
                     <element signature="e#0#29#0" expanded="true" />
                   </folding>
@@ -143,11 +143,11 @@
         <option value="$PROJECT_DIR$/test_math.py" />
         <option value="$PROJECT_DIR$/bluetooth/connect.py" />
         <option value="$PROJECT_DIR$/input.py" />
-        <option value="$PROJECT_DIR$/controller.py" />
         <option value="$PROJECT_DIR$/bluetooth/send.py" />
         <option value="$PROJECT_DIR$/bluetooth/receive.py" />
         <option value="$PROJECT_DIR$/bluetooth_connection/receive.py" />
         <option value="$PROJECT_DIR$/bluetooth_connection/send.py" />
+        <option value="$PROJECT_DIR$/controller.py" />
       </list>
     </option>
   </component>
@@ -689,16 +689,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/controller.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-548">
-          <caret line="84" column="34" selection-start-line="84" selection-start-column="34" selection-end-line="84" selection-end-column="34" />
-          <folding>
-            <element signature="e#0#29#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/bluetooth_connection/receive.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="411">
@@ -713,6 +703,16 @@
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret column="14" selection-start-column="14" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controller.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="22" column="23" selection-start-line="22" selection-start-column="23" selection-end-line="22" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

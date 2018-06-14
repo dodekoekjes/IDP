@@ -11,21 +11,15 @@ class Controller(Observer):
 
         # setup host
         self.host = connect.Connect(1, "host", "receive", 'B8:27:EB:DE:5F:36', 5, klass=self)
-        time.sleep(10)
+        self.host.start()
         # setup client
         self.client = connect.Connect(2, "client", "send", 'B8:27:EB:36:3E:F8', 4, klass=self)
+        self.client.start()
 
         self.controller_input = None
         self.args = []
         self.stance = "manual"
         self.stances = ["manual", "dance", "battlestance", "dab", "reset"]
-        self.start()
-
-    def start(self):
-        """Starts modules and components"""
-        # Start new threads
-        self.host.start()
-        self.client.start()
         self.controls()
 
     def controls(self):

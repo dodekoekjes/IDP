@@ -43,11 +43,8 @@ class Controller(Observer):
 
         # initialize bluetooth_connection connection
         self.host = connect.Connect(1, "host", "receive", 'B8:27:EB:36:3E:F8', 4, klass=self)
-        time.sleep(10)
-        self.client = connect.Connect(2, "client", "send", 'B8:27:EB:DE:5F:36', 5, klass=self)
-
-        # start bluetooth_connection connection
         self.host.start()
+        self.client = connect.Connect(2, "client", "send", 'B8:27:EB:DE:5F:36', 5, klass=self)
         self.client.start()
 
         self.msg_received = False
