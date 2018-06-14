@@ -36,10 +36,10 @@ class Input():
         self.spi.max_speed_hz = 1350000
 
         # dev
-        self.vrx_pos1 = 1234
-        self.vry_pos1 = 1234
-        self.vrx_pos2 = 1234
-        self.vry_pos2 = 1234
+        self.vrx_pos1 = 1023
+        self.vry_pos1 = 1023
+        self.vrx_pos2 = 1023
+        self.vry_pos2 = 1023
 
     def read_channel(self, channel):
         val = self.spi.xfer2([1, (8 + channel) << 4, 0])
