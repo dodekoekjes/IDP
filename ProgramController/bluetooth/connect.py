@@ -13,7 +13,7 @@ class Connect(threading.Thread):
         self.param = param
         self.macc_address = mac_address
         self.port = port
-        self.send = None
+        self.send = Send(self.macc_address, self.port)
         self.host = None
         self.klass = klass
 
