@@ -81,14 +81,16 @@ class Controller(Observer):
 
         print("arg[0] converted:", arg[0])
 
-        if not self.using_joysticks:
-            self.args.join(arg+"|")
-            if arg[0] == "manual":
-                self.using_joysticks = True
-            else:
-                self.execute(arg[0])
+        self.args.join(arg+"|")
+        if arg[0] == "manual":
+            self.using_joysticks = True
         else:
-            self.joystick_controls(arg)
+            self.using_joysticks = False
+
+        if self.using_joysticks:
+            self.joystick_contsrols(arg)
+        else:
+            self.execute(arg[0])
 
     def execute(self, arg):
         if arg == "arm":
