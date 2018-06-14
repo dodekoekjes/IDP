@@ -29,11 +29,11 @@ class Receive(Observable):
         s.bind((self.host_m_a_c_address, self.port))
         s.listen(self.backlog)
         try:
-            print("Connection to bluetooth client..")
+            print("setting up bluetooth host")
             client, address = s.accept()
-            print("Connection established.\n"
-                  "Waiting for bluetooth client message..")
+            print("Host setup successful.")
             while True:
+                print("Waiting for bluetooth client message..")
                 data = client.recv(self.size)
                 if data:
                     print(data)

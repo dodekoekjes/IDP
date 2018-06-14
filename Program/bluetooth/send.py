@@ -30,7 +30,7 @@ class Send:
                 print(10-count)
                 count += 1
                 time.sleep(1)
-            self.retry()
+            return self.retry()
 
     def controller_input(self, arg):
         """Sends controller input"""

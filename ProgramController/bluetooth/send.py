@@ -13,7 +13,6 @@ class Send:
             self.s.connect((self.server_m_a_c_address, self.port))
         except OSError as e:
             print("ERROR: -> init", e.args)
-            self.retry()
 
         self.INT = 0x00
         self.UINT = 0x01
@@ -21,24 +20,14 @@ class Send:
         self.BOOL = 0x03
         self.FLOAT = 0x04
 
-    def retry(self):
-        try:
-            self.s.connect((self.server_m_a_c_address, self.port))
-        except OSError as e:
-            print("ERROR:", e.args, "\nTrying to reconnect...")
-            count = 0
-            while count < 10:
-                print(10 - count)
-                count += 1
-                time.sleep(1)
-            self.retry()
-
     def controller_input(self, arg):
         """Sends controller input"""
         if arg[0] == "quit" or arg == "quit":
             self.s.close()
+
+        data = self.convert(arg)
         try:
-            self.s.send(self.convert(arg))
+            self.s.send(data)
         except socket.error as e:
             print("ERROR: -> send", e.args)
 
