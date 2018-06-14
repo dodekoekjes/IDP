@@ -1,4 +1,4 @@
-from bluetooth_connection import *
+from bluetooth import *
 from util.observer import Observable
 import struct
 

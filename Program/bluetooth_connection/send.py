@@ -1,4 +1,4 @@
-from bluetooth_connection import *
+from bluetooth import *
 import struct
 import time
 import sys
