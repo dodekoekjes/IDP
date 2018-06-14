@@ -57,7 +57,7 @@ class Receive(Observable):
         arr_bytes = data
         arr = []
 
-        for _ in range(6):
+        for _ in range(7):
             arr2 = bytearray()
             vtype = arr_bytes[offset]
             vtype2 = ""
