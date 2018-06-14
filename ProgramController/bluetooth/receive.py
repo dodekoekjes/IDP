@@ -34,7 +34,7 @@ class Receive(Observable):
             print("Host setup successful.")
             while True:
                 print("Waiting for bluetooth client message..")
-                data = client.recv(self.size)
+                data = s.recv(self.size)
                 if data:
                     print(data)
                     client.send(data)
