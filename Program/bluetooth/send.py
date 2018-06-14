@@ -1,6 +1,7 @@
-import socket
+from bluetooth import *
 import struct
 import time
+import sys
 
 
 class Send:
@@ -8,11 +9,32 @@ class Send:
         """Send raw data"""
         self.server_m_a_c_address = mac_address  # server mac address
         self.port = port
-        try:
-            self.s = socket.socket(socket.AF_BLUETOOTH, socket.SOCK_STREAM, socket.BTPROTO_RFCOMM)
-            self.s.connect((self.server_m_a_c_address, self.port))
-        except OSError as e:
-            print("ERROR:", e.args)
+
+        if sys.version < '3':
+            user_input = input()
+        self.addr = None
+
+        if len(sys.argv) < 2:
+            print("no device specified.  Searching all nearby bluetooth devices for")
+            print("the Controller service")
+        else:
+            self.addr = sys.argv[1]
+            print("Searching for Controller on %s" % self.addr)
+
+        # search for the SampleServer service
+        self.uuid = "94f39d29-7d6d-437d-973b-fba39e49d4ee"
+        self.service_matches = find_service(uuid=self.uuid, address=self.addr)
+
+        if len(self.service_matches) == 0:
+            print("couldn't find the Controller service =(")
+            sys.exit(0)
+
+        self.first_match = self.service_matches[0]
+        self.port = self.first_match["port"]
+        self.name = self.first_match["name"]
+        self.host = self.first_match["host"]
+
+        print("connecting to \"%s\" on %s" % (self.name, self.host))
 
         self.INT = 0x00
         self.UINT = 0x01
@@ -22,26 +44,29 @@ class Send:
 
     def controller_input(self, arg):
         """Sends controller input"""
-        self.s = socket.socket(socket.AF_BLUETOOTH, socket.SOCK_STREAM, socket.BTPROTO_RFCOMM)
-        self.s.connect((self.server_m_a_c_address, self.port))
-        if arg == "quit":
-            self.s.close()
+        # Create the client socket
+        sock = BluetoothSocket(RFCOMM)
+        sock.connect((self.host, self.port))
 
-        try:
-            self.s.send(bytes(arg, 'UTF-8'))
-        except socket.error as e:
-            print("ERROR:", e.args)
+        print("connected.  type stuff")
+        data = arg
+        sock.send(data)
+
+        sock.close()
 
     def console(self):
-        while 1:
-            text = input("Type raw data:\n")
-            if text == "quit":
+        # Create the client socket
+        sock = BluetoothSocket(RFCOMM)
+        sock.connect((self.host, self.port))
+
+        print("connected.  type stuff")
+        while True:
+            data = input()
+            if len(data) == 0:
                 break
-            try:
-                self.s.send(bytes(text, 'UTF-8'))
-            except socket.error as e:
-                    print("ERROR:", e.args)
-        self.s.close()
+            sock.send(data)
+
+        sock.close()
 
     def convert(self, arg):
         if arg[0] == "manual":

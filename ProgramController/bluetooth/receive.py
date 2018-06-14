@@ -13,6 +13,25 @@ class Receive(Observable):
         self.size = size
         self.data = None
 
+        self.server_sock = BluetoothSocket(RFCOMM)
+        self.server_sock.bind(("", PORT_ANY))
+        self.server_sock.listen(1)
+
+        self.port = self.server_sock.getsockname()[1]
+
+        self.uuid = "94f39d29-7d6d-437d-973b-fba39e49d4ee"
+
+        self.advertise_service(self.server_sock, "SampleServer",
+                               service_id=self.uuid,
+                               service_classes=[self.uuid, SERIAL_PORT_CLASS],
+                               profiles=[SERIAL_PORT_PROFILE],
+                               # protocols = [ OBEX_UUID ]
+                               )
+
+        print("Waiting for connection on RFCOMM channel %d" % self.port)
+        self.client_sock, self.client_info = self.server_sock.accept()
+        print("Accepted connection from ", self.client_info)
+
         self.INT = 0x00
         self.UINT = 0x01
         self.STR = 0x02
@@ -25,32 +44,20 @@ class Receive(Observable):
         Observable.notifyObservers(self, arg)
 
     def start(self):
-        s = socket.socket(socket.AF_BLUETOOTH, socket.SOCK_STREAM, socket.BTPROTO_RFCOMM)
-        s.bind((self.host_m_a_c_address, self.port))
-        s.listen(self.backlog)
         try:
-            print("setting up bluetooth host")
-            client, address = s.accept()
-            print("Host setup successful.")
             while True:
-                print("Waiting for bluetooth client message..")
-                data = add.recv(self.size)
-                if data:
-                    print(data)
-                    client.send(data)
-                    self.data = str(data)
-                    if str(data) == "quit":
-                        client.close()
-                        s.close()
-                    else:
-                        self.notifyObservers(self.data)
-        except:
-            print("\nClosing socket..")
-            try:
-                client.close()
-            except NameError:
-                print("ERROR: Connection terminated")
-            s.close()
+                data = self.client_sock.recv(1024)
+                if len(data) == 0: break
+                print("received [%s]" % data)
+                self.notifyObservers(data)
+        except IOError:
+            pass
+
+        print("disconnected")
+
+        self.client_sock.close()
+        self.server_sock.close()
+        print("all done")
 
     def convert(self, data):
         offset = 0
