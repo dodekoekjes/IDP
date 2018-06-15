@@ -10,12 +10,15 @@ class Send(threading.Thread):
         """Send raw data"""
         super().__init__()
         self.server_m_a_c_address = mac_address  # server mac address
-        self.port = port
+        self.port = ""
 
         self.uuid = ""
         self.service_matches = None
         self.first_match = None
-        self.host = None
+        self.host = ""
+
+        self.id = threadID
+        self.threadName = name
 
         self.INT = 0x00
         self.UINT = 0x01

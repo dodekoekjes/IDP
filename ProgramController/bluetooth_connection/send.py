@@ -10,13 +10,13 @@ class Send(threading.Thread):
         """Send raw data"""
         super().__init__()
         self.server_m_a_c_address = mac_address  # server mac address
-        self.port = port
+        self.port = ""
 
         self.addr = None
         self.uuid = ""
         self.service_matches = None
         self.first_match = None
-        self.host = None
+        self.host = ""
 
         self.id = threadID
         self.threadName = name
@@ -54,8 +54,6 @@ class Send(threading.Thread):
 
         print("connecting to \"%s\" on %s" % (self.name, self.host))
 
-
-
     def controller_input(self, arg):
         """Sends controller input"""
         if arg[0] == "quit" or arg == "quit":
@@ -66,7 +64,7 @@ class Send(threading.Thread):
 
         #print("connected.  type stuff")
         data = arg
-        sock.send(data)
+        sock.send(self.convert(data))
 
         sock.close()
 
