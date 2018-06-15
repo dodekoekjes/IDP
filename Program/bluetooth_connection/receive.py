@@ -4,10 +4,11 @@ import struct
 import threading
 
 
-class Receive(Observable, threading.Thread):
+class Receive(threading.Thread, Observable):
     def __init__(self, threadID, name, mac_address, port, backlog=1, size=1024):
         """Listen for incoming data"""
-        super().__init__()
+        threading.Thread.__init__(self)
+        Observable.__init__(self)
         self.host_m_a_c_address = mac_address  # own mac address
         self.port = port
         self.backlog = backlog
@@ -25,7 +26,7 @@ class Receive(Observable, threading.Thread):
 
         self.uuid = "94f39d29-7d6d-437d-973b-fba39e49d4ee"
 
-        self.advertise_service(self.server_sock, "SampleServer",
+        advertise_service(self.server_sock, "SampleServer",
                                service_id=self.uuid,
                                service_classes=[self.uuid, SERIAL_PORT_CLASS],
                                profiles=[SERIAL_PORT_PROFILE],
