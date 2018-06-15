@@ -32,8 +32,7 @@ class Controller(Observer):
         self.sound = SoundRecognition()
 
         # initialize bluetooth_connection connection
-        self.host = receive.Receive(1, "host", 'B8:27:EB:36:3E:F8', 4)
-        self.host.addObserver(self)
+        self.host = connect.Connect(1, "host", 'B8:27:EB:36:3E:F8', 4, self)
         self.host.start()
         time.sleep(10)
         self.client = send.Send(2, "client", 'B8:27:EB:DE:5F:36', 5)
@@ -56,7 +55,7 @@ class Controller(Observer):
         # self.joystick_controls()
 
     def has_received(self):
-        self.client.command("received")
+        self.client.controller_input("received")
 
     def update(self, observable, arg):
         """Updates the modules"""
@@ -117,7 +116,6 @@ class Controller(Observer):
         joyval_float2_x = args[4]
         joyval_float2_y = args[5]
         button2 = args[6]
-
 
         self.speed1_x = abs(200*joyval_float1_x)
         self.speed1_y = abs(200*joyval_float1_y)

@@ -4,19 +4,15 @@ import struct
 import threading
 
 
-class Receive(threading.Thread, Observable):
-    def __init__(self, threadID, name, mac_address, port, backlog=1, size=1024):
+class Receive(Observable):
+    def __init__(self, mac_address, port, backlog=1, size=1024):
         """Listen for incoming data"""
-        threading.Thread.__init__(self)
-        Observable.__init__(self)
+        super().__init__()
         self.host_m_a_c_address = mac_address  # own mac address
         self.port = port
         self.backlog = backlog
         self.size = size
         self.data = None
-
-        self.id = threadID
-        self.threadName = name
 
         self.server_sock = BluetoothSocket(RFCOMM)
         self.server_sock.bind(("", PORT_ANY))
@@ -48,10 +44,10 @@ class Receive(threading.Thread, Observable):
         self.setChanged()
         Observable.notifyObservers(self, arg)
 
-    def run(self):
+    def start(self):
         try:
             while True:
-                data = self.client_sock.recv(1024)
+                data = self.client_sock.recv(self.size)
                 if len(data) == 0: break
                 print("received [%s]" % data)
                 self.notifyObservers(self.convert(data))

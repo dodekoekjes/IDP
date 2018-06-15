@@ -50,8 +50,6 @@ class Send(threading.Thread):
 
         print("connecting to \"%s\" on %s" % (self.name, self.host))
 
-
-
     def controller_input(self, arg):
         """Sends controller input"""
         # Create the client socket

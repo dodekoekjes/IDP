@@ -10,8 +10,7 @@ class Controller(Observer):
         """Creates all the modules"""
 
         # setup host
-        self.host = receive.Receive(1, "host", 'B8:27:EB:DE:5F:36', 5)
-        self.host.addObserver(self)
+        self.host = connect.Connect(1, "host", 'B8:27:EB:DE:5F:36', 5, self)
         self.host.start()
         time.sleep(10)
         # setup client
@@ -155,7 +154,7 @@ class Controller(Observer):
                 # testing
                 print(x1, y1, b1, x2, y2, b2)
 
-            self.client.command(command)
+            self.client.controller_input(command)
 
     def update(self, observable, arg):
         """updates the modules"""
