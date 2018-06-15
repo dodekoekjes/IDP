@@ -35,6 +35,7 @@ class Controller(Observer):
         self.host = receive.Receive(1, "host", 'B8:27:EB:36:3E:F8', 4)
         self.host.addObserver(self)
         self.host.start()
+        time.sleep(10)
         self.client = connect.Connect(2, "client", 'B8:27:EB:DE:5F:36', 5)
         self.client.start()
 
