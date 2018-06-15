@@ -1,10 +1,11 @@
 from bluetooth import *
 from util.observer import Observable
 import struct
+import threading
 
 
-class Receive(Observable):
-    def __init__(self, mac_address, port, backlog=1, size=1024):
+class Receive(Observable, threading.Thread):
+    def __init__(self, threadID, name, mac_address, port, backlog=1, size=1024):
         """Listen for incoming data"""
         super().__init__()
         self.host_m_a_c_address = mac_address  # own mac address
@@ -12,6 +13,9 @@ class Receive(Observable):
         self.backlog = backlog
         self.size = size
         self.data = None
+
+        self.id = threadID
+        self.threadName = name
 
         self.server_sock = BluetoothSocket(RFCOMM)
         self.server_sock.bind(("", PORT_ANY))
@@ -43,13 +47,13 @@ class Receive(Observable):
         self.setChanged()
         Observable.notifyObservers(self, arg)
 
-    def start(self):
+    def run(self):
         try:
             while True:
                 data = self.client_sock.recv(1024)
                 if len(data) == 0: break
                 print("received [%s]" % data)
-                self.notifyObservers(data)
+                self.notifyObservers(str(data))
         except IOError:
             pass
 

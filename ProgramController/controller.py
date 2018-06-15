@@ -1,4 +1,4 @@
-from bluetooth_connection import connect
+from bluetooth_connection import *
 from util.observer import Observer
 from input import Input as CI
 import time
@@ -10,10 +10,11 @@ class Controller(Observer):
         """Creates all the modules"""
 
         # setup host
-        self.host = connect.Connect(1, "host", "receive", 'B8:27:EB:DE:5F:36', 5, klass=self)
+        self.host = receive.Receive(1, "host", 'B8:27:EB:DE:5F:36', 5)
+        self.host.addObserver(self)
         self.host.start()
         # setup client
-        self.client = connect.Connect(2, "client", "send", 'B8:27:EB:36:3E:F8', 4, klass=self)
+        self.client = send.Send(2, "client", 'B8:27:EB:36:3E:F8', 4)
         self.client.start()
 
         self.controller_input = None

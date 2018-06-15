@@ -6,7 +6,7 @@ from .send import Send
 
 class Connect(threading.Thread):
     def __init__(self, threadID, name, param: str, mac_address: str, port: int, klass):
-        """Interact with another bluetooth_connection device using multi-threading"""
+        """Interact with another bluetooth device using multi-threading"""
         super().__init__()
         self.threadID = threadID
         self.name = name

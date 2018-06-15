@@ -2,14 +2,28 @@ from bluetooth import *
 import struct
 import time
 import sys
+import threading
 
 
-class Send:
-    def __init__(self, mac_address, port):
+class Send(threading.Thread):
+    def __init__(self, threadID, name, mac_address, port):
         """Send raw data"""
+        super().__init__()
         self.server_m_a_c_address = mac_address  # server mac address
         self.port = port
 
+        self.uuid = ""
+        self.service_matches = None
+        self.first_match = None
+        self.host = None
+
+        self.INT = 0x00
+        self.UINT = 0x01
+        self.STR = 0x02
+        self.BOOL = 0x03
+        self.FLOAT = 0x04
+
+    def run(self):
         if sys.version < '3':
             user_input = input()
         self.addr = None
@@ -36,11 +50,7 @@ class Send:
 
         print("connecting to \"%s\" on %s" % (self.name, self.host))
 
-        self.INT = 0x00
-        self.UINT = 0x01
-        self.STR = 0x02
-        self.BOOL = 0x03
-        self.FLOAT = 0x04
+
 
     def controller_input(self, arg):
         """Sends controller input"""
