@@ -10,7 +10,7 @@ class Send(threading.Thread):
         """Send raw data"""
         super().__init__()
         self.server_m_a_c_address = mac_address  # server mac address
-        self.port = ""
+        self.port = port
 
         self.addr = None
         self.uuid = ""
@@ -117,7 +117,7 @@ class Send(threading.Thread):
 
         print(arr_bytes)
 
-        return arr_bytes
+        return bytes(arr_bytes)
 
 
 if __name__ == '__main__':

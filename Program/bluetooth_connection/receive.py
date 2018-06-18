@@ -22,7 +22,7 @@ class Receive(Observable):
 
         self.uuid = "94f39d29-7d6d-437d-973b-fba39e49d4ee"
 
-        advertise_service(self.server_sock, "SampleServer",
+        advertise_service(self.server_sock, "groep12Controller",
                                service_id=self.uuid,
                                service_classes=[self.uuid, SERIAL_PORT_CLASS],
                                profiles=[SERIAL_PORT_PROFILE],
@@ -34,7 +34,7 @@ class Receive(Observable):
         print("Accepted connection from ", self.client_info)
 
         self.INT = 0x00
-        self.UINT = 0x01
+        self.UINT = 0x01mp
         self.STR = 0x02
         self.BOOL = 0x03
         self.FLOAT = 0x04
@@ -50,7 +50,7 @@ class Receive(Observable):
                 data = self.client_sock.recv(self.size)
                 if len(data) == 0: break
                 print("received [%s]" % data)
-                self.notifyObservers(self.convert(data))
+                self.notifyObservers(self.convert(bytearray(data)))
         except IOError:
             pass
 
