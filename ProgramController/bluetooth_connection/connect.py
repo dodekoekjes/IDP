@@ -9,7 +9,6 @@ class Connect(threading.Thread):
         super().__init__()
         self.threadID = threadID
         self.name = name
-        self.param = param
         self.macc_address = mac_address
         self.port = port
         self.host = None

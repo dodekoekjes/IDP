@@ -21,7 +21,7 @@ class Receive(Observable):
 
         self.uuid = "94f39d29-7d6d-437d-973b-fba39e49d4ee"
 
-        advertise_service(self.server_sock, "SampleServer",
+        advertise_service(self.server_sock, "Groep12Controller",
                                service_id=self.uuid,
                                service_classes=[self.uuid, SERIAL_PORT_CLASS],
                                profiles=[SERIAL_PORT_PROFILE],
@@ -48,8 +48,8 @@ class Receive(Observable):
             while True:
                 data = self.client_sock.recv(self.size)
                 if len(data) == 0: break
-                print("received [%s]" % data)
-                self.notifyObservers(str(data))
+                print("received [%s]" % data, )
+                self.notifyObservers(str(data, "utf-8"))
         except IOError:
             pass
 
