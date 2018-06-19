@@ -16,6 +16,7 @@ class Controller(Observer):
         # setup client
         self.client = send.Send(2, "client", 'B8:27:EB:36:3E:F8', 4)
         self.client.start()
+        time.sleep(10)
 
         self.connected = False
 
@@ -158,12 +159,14 @@ class Controller(Observer):
 
             while not self.connected:
                 print("not connected")
+                user_input = input("type continue:\n")
+                if user_input == "continue":
+                    self.connected = True
             self.client.controller_input(command)
 
     def update(self, observable, arg):
         """updates the modules"""
         print(observable, "argument:", arg)
-
         if arg == "received":
             self.controls()
 

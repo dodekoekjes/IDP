@@ -51,19 +51,24 @@ class Send(threading.Thread):
         self.name = self.first_match["name"]
         self.host = self.first_match["host"]
 
+        self.sock = BluetoothSocket(RFCOMM)
+
         print("connecting to \"%s\" on %s" % (self.name, self.host))
+
+        self.sock.connect((self.host, self.port))
 
     def controller_input(self, arg):
         """Sends controller input"""
         # Create the client socket
-        sock = BluetoothSocket(RFCOMM)
-        sock.connect((self.host, self.port))
+
+
 
         print("connected.  type stuff")
         data = arg
-        sock.send(data)
+        self.sock.send(data)
 
-        sock.close()
+        if arg == "close":
+            self.sock.close()
 
     def console(self):
         # Create the client socket

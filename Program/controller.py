@@ -37,6 +37,7 @@ class Controller(Observer):
         time.sleep(10)
         self.client = send.Send(2, "client", 'B8:27:EB:DE:5F:36', 5)
         self.client.start()
+        time.sleep(10)
 
         self.msg_received = False
         # Add controller as observer to classes
