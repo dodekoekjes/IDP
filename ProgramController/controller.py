@@ -17,6 +17,8 @@ class Controller(Observer):
         self.client = send.Send(2, "client", 'B8:27:EB:36:3E:F8', 4)
         self.client.start()
 
+        self.connected = False
+
         self.controller_input = None
         self.args = []
         self.stance = "manual"
@@ -154,6 +156,8 @@ class Controller(Observer):
                 # testing
                 print(x1, y1, b1, x2, y2, b2)
 
+            while not self.connected:
+                print("not connected")
             self.client.controller_input(command)
 
     def update(self, observable, arg):
