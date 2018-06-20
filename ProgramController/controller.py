@@ -142,10 +142,25 @@ class Controller(Observer):
 
 
                 ## Multiply afformentioned position by the MULTIPLIER and subtract 1
-                joyval_float1_x = MULTIPLIER * x1 - 1
-                joyval_float1_y = MULTIPLIER * y1 - 1
-                joyval_float2_x = MULTIPLIER * x2 - 1
-                joyval_float2_y = MULTIPLIER * y2 -1
+                if 423 < x1 < 600:
+                    joyval_float1_x = 0
+                else:
+                    joyval_float1_x = MULTIPLIER * x1 - 1
+
+                if 423 < y1 < 600:
+                    joyval_float1_y = 0
+                else:
+                    joyval_float1_y = MULTIPLIER * y1 - 1
+
+                if 423 < x2 < 600:
+                    joyval_float2_x = 0
+                else:
+                    joyval_float2_x = MULTIPLIER * x2 - 1
+
+                if 423 < y2 < 600:
+                    joyval_float2_y = 0
+                else:
+                    joyval_float2_y = MULTIPLIER * y2 -1
 
                 command = ["manual", joyval_float1_x, joyval_float1_y, b1, joyval_float2_x, joyval_float2_y, b2]
                 print("Command:")

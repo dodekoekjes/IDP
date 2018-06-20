@@ -60,28 +60,27 @@ class Send(threading.Thread):
         """Sends controller input"""
         if arg[0] == "quit" or arg == "quit":
             self.s.close()
+            self.sock.close()
         # Create the client socket
 
 
         #print("connected.  type stuff")
         data = arg
         self.sock.send(self.convert(data))
-        if arg == "close":
-            self.sock.close()
 
     def console(self):
         # Create the client socket
-        sock = BluetoothSocket(RFCOMM)
-        sock.connect((self.host, self.port))
+        self.sock = BluetoothSocket(RFCOMM)
+        self.sock.connect((self.host, self.port))
 
         print("connected.  type stuff")
         while True:
             data = input()
             if len(data) == 0:
                 break
-            sock.send(data)
+            self.sock.send(data)
 
-        sock.close()
+        self.sock.close()
 
     def convert(self, arg):
         if arg[0] == "manual":

@@ -81,7 +81,6 @@ class Controller(Observer):
 
         print("arg[0] converted:", arg[0])
 
-        self.args.join(arg+"|")
         if arg[0] == "manual":
             self.using_joysticks = True
         else:
