@@ -44,14 +44,11 @@ class Receive(Observable):
         Observable.notifyObservers(self, arg)
 
     def start(self):
-        try:
-            while True:
-                data = self.client_sock.recv(self.size)
-                if len(data) == 0: break
-                print("received [%s]" % data, )
-                self.notifyObservers(str(data, "utf-8"))
-        except IOError:
-            pass
+
+        while True:
+            data = self.client_sock.recv(self.size)
+            print("received [%s]" % data, )
+            self.notifyObservers(str(data, "utf-8"))
 
         print("disconnected")
 

@@ -12,7 +12,7 @@ class Send(threading.Thread):
         self.server_m_a_c_address = mac_address  # server mac address
         self.port = port
 
-        self.addr = None
+        self.addr = self.server_m_a_c_address #'10:02:B5:C9:C3:5D'
         self.uuid = ""
         self.service_matches = None
         self.first_match = None
@@ -26,17 +26,18 @@ class Send(threading.Thread):
         self.STR = 0x02
         self.BOOL = 0x03
         self.FLOAT = 0x04
+        self.sock = BluetoothSocket(RFCOMM)
 
     def run(self):
         if sys.version < '3':
             user_input = input()
 
 
-        if len(sys.argv) < 2:
+        if self.addr == None: #len(sys.argv) < 2:
             print("no device specified.  Searching all nearby bluetooth_connection devices for")
             print("the Controller service")
         else:
-            self.addr = sys.argv[1]
+            # self.addr = sys.argv[1]
             print("Searching for Controller on %s" % self.addr)
 
         # search for the SampleServer service
@@ -65,22 +66,21 @@ class Send(threading.Thread):
 
 
         #print("connected.  type stuff")
-        data = arg
-        self.sock.send(self.convert(data))
+        self.sock.send(self.convert(arg))
 
-    def console(self):
-        # Create the client socket
-        self.sock = BluetoothSocket(RFCOMM)
-        self.sock.connect((self.host, self.port))
-
-        print("connected.  type stuff")
-        while True:
-            data = input()
-            if len(data) == 0:
-                break
-            self.sock.send(data)
-
-        self.sock.close()
+    #def console(self):
+    #    # Create the client socket
+    #    self.sock = BluetoothSocket(RFCOMM)
+    #    self.sock.connect((self.host, self.port))
+#
+    #    print("connected.  type stuff")
+    #    while True:
+    #        data = input()
+    #        if len(data) == 0:
+    #            break
+    #        self.sock.send(data)
+#
+    #    self.sock.close()
 
     def convert(self, arg):
         if arg[0] == "manual":

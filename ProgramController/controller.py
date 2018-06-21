@@ -12,7 +12,7 @@ class Controller(Observer):
         # setup host
         self.host = connect.Connect(1, "host", 'B8:27:EB:DE:5F:36', 5, self)
         self.host.start()
-        time.sleep(10)
+        time.sleep(20)
         # setup client
         self.client = send.Send(2, "client", 'B8:27:EB:36:3E:F8', 4)
         self.client.start()
@@ -20,7 +20,7 @@ class Controller(Observer):
 
         self.connected = False
 
-        self.controller_input = None
+        self.controller_input = CI()
         self.args = []
         self.stance = "manual"
         self.stances = ["manual", "dance", "battlestance", "dab", "reset"]
@@ -28,7 +28,6 @@ class Controller(Observer):
 
     def controls(self):
             command = []
-            self.controller_input = CI()
             # add "dev" to run on computer
             if self.stance == "manual":
 
@@ -185,6 +184,6 @@ class Controller(Observer):
         if arg == "received":
             self.controls()
 
-        if arg[0] in self.stances:
-            self.stance = arg[0]
-        self.args.append(arg)
+        #if arg[0] in self.stances:
+        #    self.stance = arg[0]
+        #self.args.append(arg)

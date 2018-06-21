@@ -51,8 +51,8 @@ class Receive(Observable):
                 if len(data) == 0: break
                 print("received [%s]" % data)
                 self.notifyObservers(self.convert(bytearray(data)))
-        except IOError:
-            pass
+        except IOError as e:
+            print(e.args)
 
         print("disconnected")
 

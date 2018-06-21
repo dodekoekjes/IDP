@@ -27,15 +27,13 @@ class Send(threading.Thread):
         self.FLOAT = 0x04
 
     def run(self):
-        if sys.version < '3':
-            user_input = input()
-        self.addr = None
+        self.addr = self.server_m_a_c_address
 
-        if len(sys.argv) < 2:
+        if self.addr == None:
             print("no device specified.  Searching all nearby bluetooth_connection devices for")
             print("the Controller service")
         else:
-            self.addr = sys.argv[1]
+            #self.addr = sys.argv[1]
             print("Searching for Controller on %s" % self.addr)
 
         # search for the SampleServer service
