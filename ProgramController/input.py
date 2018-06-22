@@ -32,7 +32,7 @@ class Input():
         GPIO.setup(self.b_pin2, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
         self.spi = spidev.SpiDev()
-        self.spi.open(1, 2)
+        self.spi.open(1, 0) # change to the proper spi device - ls /dev/ | grep spi
         self.spi.max_speed_hz = 1350000
 
         # dev
