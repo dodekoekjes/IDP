@@ -7,6 +7,7 @@ from sound_recognition import SoundRecognition
 from util.observer import Observer
 from bluetooth_connection import *
 import time
+import robot
 
 
 class Controller(Observer):
@@ -48,15 +49,23 @@ class Controller(Observer):
         self.movement.addObserver(self)
         self.sound.addObserver(self)
 
+        self.robot = robot.Robot(6, 3)
+
         self.list = [self.arm, self.builder, self.dancing, self.direction, self.movement, self.sound]
 
 
 
-        # # self.controls()
+        # self.controls()
         # self.joystick_controls()
 
     def has_received(self):
-        self.client.controller_input("received")
+        try:
+            self.client.controller_input("received")
+        except:
+            self.client = send.Send(2, "client", 'B8:27:EB:DE:5F:36', 5)
+            self.client.start()
+            time.sleep(10)
+            self.has_received()
 
     def update(self, observable, arg):
         """Updates the modules"""
@@ -123,6 +132,10 @@ class Controller(Observer):
         self.speed2_y = abs(200*joyval_float2_y)
         for arg in args:
             print("--", arg)
+        if args[0] == "manual":
+            self.robot.manual(joyval_float1_x, joyval_float1_y)
+        else:
+            print("do something else -> line 132 controller.py")
 
     def controls(self):
         """Command the controls"""
