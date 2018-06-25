@@ -29,10 +29,8 @@ class Send(threading.Thread):
         self.sock = BluetoothSocket(RFCOMM)
 
     def run(self):
-        if sys.version < '3':
-            user_input = input()
 
-        if self.addr == None:
+        if self.addr is None:
             print("no device specified.  Searching all nearby bluetooth_connection devices for")
             print("the Controller service")
         else:

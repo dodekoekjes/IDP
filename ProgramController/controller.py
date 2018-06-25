@@ -11,14 +11,14 @@ from PyQt5.QtWidgets import QApplication
 class Controller(Observer):
     def __init__(self):
         """Creates all the modules"""
-
-
         # setup host
         self.host = connect.Connect(1, "host", 'B8:27:EB:DE:5F:36', 5, self)
         self.host.start()
+        time.sleep(20)
         # # setup client
-        self.client = send.Send(2, "client", 'B8:27:EB:36:3E:F8', 4)
+        self.client = send.Send(2, "client", 'B8:27:EB:7F:19:3C', 4) # 'B8:27:EB:36:3E:F8', 4)
         self.client.start()
+        time.sleep(10)
 
         self.connected = False
 
@@ -29,26 +29,21 @@ class Controller(Observer):
         self.stances = ["manual", "dance", "battlestance", "dab", "reset"]
         self.controls()
 
-        # self.app_thread = threading.Thread(target=self.interface())
-        # self.app_thread.start()
-        print("test")
-
     def controls(self):
             command = []
             # add "dev" to run on computer
-
 
             output = self.controller_input.read()  # remove dev when on raspberry pi
             print("Joystick Input:", self.controller_input)
 
             # joystick 1
-            x1 = int(output[0])
-            y1 = int(output[1])
+            x1 = int(output[0])*-1
+            y1 = int(output[1])*-1
             b1 = bool(output[2])
 
             # joystick 2
-            x2 = int(output[3])
-            y2 = int(output[4])
+            x2 = int(output[3])*-1
+            y2 = int(output[4])*-1
             b2 = bool(output[5])
 
             # processing inputs
@@ -166,7 +161,7 @@ class Controller(Observer):
             if 423 < y2 < 600:
                 joyval_float2_y = 0
             else:
-                joyval_float2_y = MULTIPLIER * y2 -1
+                joyval_float2_y = MULTIPLIER * y2 - 1
 
             command = [self.stance, joyval_float1_x, joyval_float1_y, b1, joyval_float2_x, joyval_float2_y, b2]
 
@@ -176,57 +171,15 @@ class Controller(Observer):
             print("Command:")
             for item in command:
                 print("-- " + str(item))
-#            while not self.connected:
-#                print("not connected")
-#                user_input = input("type continue:\n")
-#                if user_input == "continue":
-#                    self.connected = True
             try:
                 self.client.controller_input(command)
             except:
-                print("uncomment next lines to make a retry loop")
-                # print("retrying...")
-                # self.client = send.Send(2, "client", 'B8:27:EB:36:3E:F8', 4)
-                # time.sleep(15)
-                # self.controls()
-
-    # def interface(self):
-    #     app = QApplication(sys.argv)
-    #     print("app")
-    #     ex = application.ControllerApp()
-    #     print("ex")
-    #     ex.start()
-    #     print("exstart")
-    #     app.exec_()
-    #     print("exec")
-    #     boolean = True
-    #     while boolean:
-    #         # if not boolean:
-    #         #     boolean = False
-    #         output = self.controller_input.read()
-    #
-    #         # joystick 1
-    #         x1 = int(output[0])
-    #         y1 = int(output[1])
-    #         b1 = bool(output[2])
-    #
-    #         # joystick 2
-    #         x2 = int(output[3])
-    #         y2 = int(output[4])
-    #         b2 = bool(output[5])
-    #
-    #         print("x1:", x1, "y1:", y1, "x2:", x2, "y2:", y2, "b1:", b1, "b2:", b2)
-    #
-    #         ex.instance.joy_display[0].set_pos_inner(x1, y1)
-    #         ex.instance.joy_display[1].set_pos_inner(x2, y2)
-    #         ex.instance.repaint()
-    #         time.sleep(0.08)
-    #
-    #         #application.update(x1, y1, b1, x2, y2, b2)
-    #
-    #     ex.instance.delete()
-    #     # self.app_thread.join()
-    #     print("Quitting Main thread...")
+                # print("uncomment next lines to make a retry loop")
+                print("retrying...")
+                self.client = send.Send(2, "client", 'B8:27:EB:7F:19:3C', 4)#''B8:27:EB:36:3E:F8', 4)
+                self.client.start()
+                time.sleep(5)
+                self.controls()
 
     def update(self, observable, arg):
         """updates the modules"""

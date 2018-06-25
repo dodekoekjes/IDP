@@ -55,12 +55,12 @@ class Input():
         else:
             # Determine position
             # Joystick 1
-            self.vrx_pos1 = self.read_channel(self.vrx_channel1)
-            self.vry_pos1 = self.read_channel(self.vry_channel1)
+            self.vrx_pos1 = self.read_channel(self.vry_channel1)
+            self.vry_pos1 = self.read_channel(self.vrx_channel1)
 
             # Joystick 2
-            self.vrx_pos2 = self.read_channel(self.vrx_channel2)
-            self.vry_pos2 = self.read_channel(self.vry_channel2)
+            self.vrx_pos2 = self.read_channel(self.vry_channel2)
+            self.vry_pos2 = self.read_channel(self.vrx_channel2)
 
             # Check button pressed
             # button 1
