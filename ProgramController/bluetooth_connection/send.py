@@ -32,8 +32,7 @@ class Send(threading.Thread):
         if sys.version < '3':
             user_input = input()
 
-
-        if self.addr == None: #len(sys.argv) < 2:
+        if self.addr == None:
             print("no device specified.  Searching all nearby bluetooth_connection devices for")
             print("the Controller service")
         else:
