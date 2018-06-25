@@ -53,14 +53,14 @@ class Window(QWidget):
             x2_float = MULTIPLIER*x2-1
             y2_float = MULTIPLIER*y2-1
             if self.init:
-                self.joy_display[0].set_pos_inner(x1_float, y1_float)
-                self.joy_display[0].click = b1
-                self.joy_display[1].set_pos_inner(x2_float, y2_float)
-                self.joy_display[1].click = b2
+                # self.joy_display[0].set_pos_inner(x1_float, y1_float)
+                # self.joy_display[0].click = b1
+                # self.joy_display[1].set_pos_inner(x2_float, y2_float)
+                # self.joy_display[1].click = b2
                 self.lbl_joy1.setText("Joy1:\t\tX: "+str(x1_float)[:5]+", Y: "+str(y1_float)[:5])
-                self.lbl_joy2.setText("Joy1:\t\tX: "+str(x2_float)[:5]+", Y: "+str(y2_float)[:5])
-                self.update()
-            time.sleep(0.5)
+                time.sleep(0.5)
+                self.lbl_joy2.setText("Joy2:\t\tX: "+str(x2_float)[:5]+", Y: "+str(y2_float)[:5])
+                time.sleep(0.5)
 
     def quit(self):
         print("Quitting...")
