@@ -1,17 +1,13 @@
-from controller import Controller
+import sys, traceback
+from robot import Robot
 
 
-class Main:
-    """This is the main class"""
-    def __init__(self):
-        """initializes the class"""
-        self.log = []
+def main():
+    bot = Robot(numlegs=6, legjoints=3)
+    bot.printlegs()
+    #bot.walk(numsteps=10)
+    #bot.battlestance()
+    #bot.dab()
+    bot.manual()
 
-    def start(self):
-        """Starts the controller"""
-        Controller()
-
-
-if __name__ == '__main__':
-    Main().start()
-
+main()

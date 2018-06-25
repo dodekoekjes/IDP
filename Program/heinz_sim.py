@@ -1,7 +1,7 @@
 import numpy as np
 import pyglet
 
-import arm as armlink
+import Arm
 
 
 def plot():
@@ -10,7 +10,7 @@ def plot():
     finds the appropriate joint angles to reach that point."""
 
     # create an instance of the arm
-    arm = armlink.Arm3Link(L=np.array([300, 200, 100]))
+    arm = Arm.Arm3Link(L=np.array([300, 200, 100]))
 
     # make our window for drawin'
     window = pyglet.window.Window()
@@ -62,6 +62,5 @@ def plot():
         window.jps = get_joint_positions()  # get new joint (x,y) positions
 
     pyglet.app.run()
-
 
 plot()
