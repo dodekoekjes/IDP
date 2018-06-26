@@ -311,6 +311,66 @@ class Robot:
             time.sleep(1)
         else:
             print("let the robot drive\n X:", x, "Y:", y)
+            PIN_PWM_R = 16 #36
+            PIN_FORWARD_R = 21 #40
+            PIN_BACKWARD_R = 20 #38
+
+            PIN_PWM_L = 13 #33
+            PIN_BACKWARD_L = 19 #35
+            PIN_FORWARD_L = 26 #37
+            SPEED =  100
+
+            GPIO.setup(PIN_PWM_R, GPIO.OUT)
+            GPIO.setup(PIN_FORWARD_R, GPIO.OUT)
+            GPIO.setup(PIN_BACKWARD_R, GPIO.OUT)
+
+            GPIO.setup(PIN_PWM_L, GPIO.OUT)
+            GPIO.setup(PIN_FORWARD_L, GPIO.OUT)
+            GPIO.setup(PIN_BACKWARD_L, GPIO.OUT)
+
+            pwmR=GPIO.PWM(PIN_PWM_R, 100)
+            pwmL=GPIO.PWM(PIN_PWM_L, 100)
+            pwmR.start(0)
+            pwmL.start(0)
+            is_pressed = False
+
+            if x == 0 and y > 0.5:
+                GPIO.output(PIN_FORWARD_R, True)
+                GPIO.output(PIN_BACKWARD_R, False)
+                GPIO.output(PIN_FORWARD_L, True)
+                GPIO.output(PIN_BACKWARD_L, False)
+            elif x == 0 and y < -0.5:
+                GPIO.output(PIN_FORWARD_R, False)
+                GPIO.output(PIN_BACKWARD_R, True)
+                GPIO.output(PIN_FORWARD_L, False)
+                GPIO.output(PIN_BACKWARD_L, True)
+            elif x > 0.5 and y == 0:
+                GPIO.output(PIN_FORWARD_R, False)
+                GPIO.output(PIN_BACKWARD_R, True)
+                GPIO.output(PIN_FORWARD_L, True)
+                GPIO.output(PIN_BACKWARD_L, False)
+            elif x < -0.5 and y == 0:
+                GPIO.output(PIN_FORWARD_R, True)
+                GPIO.output(PIN_BACKWARD_R, False)
+                GPIO.output(PIN_FORWARD_L, False)
+                GPIO.output(PIN_BACKWARD_L, True)
+            
+            pwmR.ChangeDutyCycle(SPEED)
+            pwmL.ChangeDutyCycle(SPEED)
+            GPIO.output(PIN_PWM_R, True)
+            GPIO.output(PIN_PWM_L, True)
+
+            if x == 0 and y == 0:
+                GPIO.output(PIN_PWM_R, False)
+                GPIO.output(PIN_PWM_L, False)
+
+                GPIO.output(PIN_BACKWARD_R, False)
+                GPIO.output(PIN_FORWARD_R, False)
+                GPIO.output(PIN_BACKWARD_L, False)
+                GPIO.output(PIN_FORWARD_L, False)
+
+
+
 
     def dance(self):
         print("let the robot dance")
