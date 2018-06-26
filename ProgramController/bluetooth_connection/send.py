@@ -98,6 +98,8 @@ class Send(threading.Thread):
             arg[0] = 7
         elif arg[0] == "lowstep":
             arg[0] = 8
+        elif arg[0] == "drive":
+            arg[0] = 9
 
         arr = arg
         arr_bytes = bytearray()

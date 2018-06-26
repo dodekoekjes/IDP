@@ -22,6 +22,7 @@ class Window(QWidget):
         self.init = False
         self.joy_display = []
         self.highstep = False
+        self.drive = False
 
         #self.controller = None
         self.thread_controller = ThrControler(2, "Controller")
@@ -69,7 +70,15 @@ class Window(QWidget):
 
     def toggle_legs(self):
         print("Toggling Legs...")
-        self.thread_controller.update("manual")
+        if not self.drive:
+            self.thread_controller.update("drive")
+            self.lbl_movement.setText("Movement:\DRIVE")
+            self.drive = True
+        else:
+            self.thread_controller.update("manual")
+            self.lbl_movement.setText("Movement:\tLEGS")
+            self.drive = False
+        self.update()
     
     def step_height(self):
         print("Toggling Step height...")
@@ -81,6 +90,7 @@ class Window(QWidget):
             self.thread_controller.update("lowstep")
             self.lbl_steps.setText("Steps:\t\tLOW")
             self.highstep = False
+        self.update()
     
     def dance(self):
         print("Dancing...")
