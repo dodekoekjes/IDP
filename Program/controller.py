@@ -85,6 +85,14 @@ class Controller(Observer):
             arg[0] = "reset"
         elif arg[0] == 5:
             arg[0] = "dance"
+        elif arg[0] == 6:
+            arg[0] = "linedance"
+        elif arg[0] == 7:
+            arg[0] = "highstep"
+        elif arg[0] == 8:
+            arg[0] = "lowstep"
+        elif arg[0] == 9:
+            arg[0] = "drive"
 
         self.has_received()
 
@@ -121,19 +129,27 @@ class Controller(Observer):
         """Commands the controls"""
         joyval_float1_x = args[1]
         joyval_float1_y = args[2]
-        button1 = args[3]
+        button1 = args[3] # Left Joystick
         joyval_float2_x = args[4]
         joyval_float2_y = args[5]
-        button2 = args[6]
+        button2 = args[6] # Right Joystick
 
         self.speed1_x = abs(200*joyval_float1_x)
         self.speed1_y = abs(200*joyval_float1_y)
         self.speed2_x = abs(200*joyval_float2_x)
         self.speed2_y = abs(200*joyval_float2_y)
+
         for arg in args:
             print("--", arg)
         if args[0] == "manual":
             self.robot.manual(joyval_float1_x, joyval_float1_y)
+        elif args[0] == "highstep":
+            self.robot.toggleStairs()
+            self.robot.manual(joyval_float1_x, joyval_float1_y)
+        elif button1 or args[0] == "reset":
+            self.robot.reset()
+        elif args[0] == "drive":
+            self.robot.drive()
         else:
             print("do something else -> line 132 controller.py")
 
