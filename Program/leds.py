@@ -15,48 +15,34 @@ class Leds:
         GPIO.output(8, GPIO.LOW)
         GPIO.output(7, GPIO.LOW)
 
-        GPIO.cleanup()
-
     def flowing(self):
         GPIO.output(25, GPIO.LOW)
         GPIO.output(8, GPIO.HIGH)
         GPIO.output(7, GPIO.LOW)
-
-        GPIO.cleanup()
 
     def disco(self):
         GPIO.output(25, GPIO.LOW)
         GPIO.output(8, GPIO.LOW)
         GPIO.output(7, GPIO.HIGH)
 
-        GPIO.cleanup()
-
     def rgb(self):
         GPIO.output(25, GPIO.HIGH)
         GPIO.output(8, GPIO.HIGH)
         GPIO.output(7, GPIO.LOW)
-
-        GPIO.cleanup()
 
     def breath(self):
         GPIO.output(25, GPIO.LOW)
         GPIO.output(8, GPIO.HIGH)
         GPIO.output(7, GPIO.HIGH)
 
-        GPIO.cleanup()
-
     def lazer(self):
         GPIO.output(25, GPIO.HIGH)
         GPIO.output(8, GPIO.HIGH)
         GPIO.output(7, GPIO.HIGH)
 
-        GPIO.cleanup()
-
-    def breath(self):
+    def beat(self):
         GPIO.output(25, GPIO.HIGH)
         GPIO.output(8, GPIO.LOW)
         GPIO.output(7, GPIO.HIGH)
-
-        GPIO.cleanup()
 
 
