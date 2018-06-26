@@ -11,7 +11,7 @@ class Robot:
     def __init__(self, numlegs, legjoints):
         self.legs = [Leg(i, legjoints) for i in range(numlegs)]
         self.direction = numlegs % 2
-        self.l = Leg(i, legjoints)
+        # self.l = Leg(i, legjoints)
 
     def printlegs(self):
         print([l.servos for l in self.legs])
@@ -44,7 +44,7 @@ class Robot:
             time.sleep(1)
 
             for i in range(13):
-                print ("Servo " + str(i + 1) + ": " + str(ax12.Ax12().readPosition(i + 1)))
+                print("Servo " + str(i + 1) + ": " + str(ax12.Ax12().readPosition(i + 1)))
 
     # Dab
     def dab(self):
@@ -92,7 +92,7 @@ class Robot:
         time.sleep(1)
 
     # Controls
-    def manual(self):
+    def manual(self, x = 0, y = 0):
         mv_delta = 30
         speed = 200
         s1 = 350
@@ -101,136 +101,158 @@ class Robot:
 
         print("HEINZ: Manual mode activated")
 
-        while True:
-            # Read a key
-            key = readchar.readkey()
+        # Read a key
+        # key = readchar.readkey(
 
-            try:
-                if key in "qa":
-                    if key == 'q' and s1 > 150:
-                        s1 -= mv_delta
-                    elif key == 'a' and s1 < 550:
-                        s1 += mv_delta
-                    for i in range(6):
-                        id = i * 3 + 1
-                        self.legs[i].moveservo(id, s1, speed)
-                elif key in "ws":
-                    if key == 'w' and s2 > 150:
-                        s2 -= mv_delta
-                    elif key == 's' and s2 < 500:
-                        s2 += mv_delta
-                    for i in range(6):
-                        id = i * 3 + 2
-                        self.legs[i].moveservo(id, s2, speed)
-                elif key in "ed":
-                    if key == 'd' and s3 > 150:
-                        s3 -= mv_delta
-                    elif key == 'e' and s3 < 625:
-                        s3 += mv_delta
-                    for i in range(6):
-                        # print i
-                        id = i * 3 + 3
-                        self.legs[i].moveservo(id, s3, speed)
-                elif key == "r":  # Walking
-                    for l in self.legs:  # raise legs
-                        if l.direction == 0:
-                            continue
-                        l.raiseleg(200)
+        try:
+            # if key in "qa":
+            #     if key == 'q' and s1 > 150:
+            #         s1 -= mv_delta
+            #     elif key == 'a' and s1 < 550:
+            #         s1 += mv_delta
+            #     for i in range(6):
+            #         id = i * 3 + 1
+            #         self.legs[i].moveservo(id, s1, speed)
+            # elif key in "ws":
+            #     if key == 'w' and s2 > 150:
+            #         s2 -= mv_delta
+            #     elif key == 's' and s2 < 500:
+            #         s2 += mv_delta
+            #     for i in range(6):
+            #         id = i * 3 + 2
+            #         self.legs[i].moveservo(id, s2, speed)
+            # elif key in "ed":
+            #     if key == 'd' and s3 > 150:
+            #         s3 -= mv_delta
+            #     elif key == 'e' and s3 < 625:
+            #         s3 += mv_delta
+            #     for i in range(6):
+            #         # print i
+            #         id = i * 3 + 3
+            #         self.legs[i].moveservo(id, s3, speed)
+            if y > 0:  # Walking
+                for l in self.legs:  # raise legs
+                    if l.direction == 0:
+                        continue
+                    l.raiseleg(200)
 
-                    time.sleep(0.4)
+                time.sleep(0.4)
+                for l in self.legs:
+                    l.step(False)
+                    time.sleep(0.009)
+                time.sleep(1)
+            elif x < 0:
+                for l in self.legs:
+                    if l.direction == 0:
+                        continue
+                    l.raiseleg(200)
+
+                time.sleep(0.4)
+
+                for l in self.legs:
+                    l.step(False, 1)
+                    time.sleep(0.009)
+                time.sleep(1)
+            elif x > 0:
+                for l in self.legs:
+                    if l.direction == 0:
+                        continue
+                    l.raiseleg(200)
+
+                time.sleep(0.4)
+                for l in self.legs:
+                    l.step(False, 2)
+                    time.sleep(0.009)
+                time.sleep(1)
+
+
+                time.sleep(0.6)  # 0.4 before
+
+                for l in self.legs:
+                    l.step(False)
+                    time.sleep(0.009)
+
+                time.sleep(1)
+            elif y < 0:  # Reverse walking (more like dancing)
+                for l in self.legs:  # raise legs
+                    if l.direction == 0:
+                        continue
+                    l.raiseleg(200)
+
+                if l.direction == 1:
                     for l in self.legs:
-                        l.step(False)
-                        time.sleep(0.009)
-                    time.sleep(1)
-                elif key == "f":
-                    for l in self.legs:
-                        if l.direction == 0:
-                            continue
-                        l.raiseleg(200)
-
-                    time.sleep(0.4)
-
-                    for l in self.legs:
-                        l.step(False, 1)
-                        time.sleep(0.009)
-                    time.sleep(1)
-                elif key == "v":
-                    for l in self.legs:
-                        if l.direction == 0:
-                            continue
-                        l.raiseleg(200)
-
-                    time.sleep(0.4)
-                    for l in self.legs:
-                        l.step(False, 2)
-                        time.sleep(0.009)
-                    time.sleep(1)
-                elif key == "c": # Walk Upstairs
-                    for l in self.legs:  # raise legs
-                        if l.direction == 0:
-                            continue
-                        l.raiseleg(100)
-
-                    time.sleep(0.6) # 0.4 before
-
-                    for l in self.legs:
-                        l.step(False)
-                        time.sleep(0.009)
-
-                    time.sleep(1)
-                elif key == "z":  # Reverse walking (more like dancing)
-                    for l in self.legs:  # raise legs
-                        if l.direction == 0:
-                            continue
-                        l.raiseleg(200)
-
-                    if l.direction == 1:
-                        for l in self.legs:
-                            l.moveservo(l.servos[0], l.backwardangle, speed)
-                        time.sleep(0.3)
-                        for l in self.legs:
-                            l.moveservo(l.servos[1], 485, speed)
-                        time.sleep(0.3)
-                        for l in self.legs:
-                            l.moveservo(l.servos[2], 400, speed)
-
-                        time.sleep(1)
-
-                        l.direction = 0
-                    elif l.direction == 0:
-                        for l in self.legs:
-                            l.moveservo(l.servos[0], l.forwardangle, speed)
-                        time.sleep(0.3)
-                        for l in self.legs:
-                            l.moveservo(l.servos[1], 485, speed)
-                        time.sleep(0.3)
-                        for l in self.legs:
-                            l.moveservo(l.servos[2], 400, speed)
-
-                        time.sleep(1)
-
-                        l.direction = 1
-
+                        l.moveservo(l.servos[0], l.backwardangle, speed)
                     time.sleep(0.3)
-                elif key == "l":  # Show load
-                    self.showLoad()
-                elif key == "u":  # Hybrid mode
-                    self.hybrid()
-                elif key == "o":  # Reset
-                    self.reset()
-                elif key == "p":  # Show positions
-                    self.showPositions()
-                elif key == "b":  # Battlestance
-                    self.battlestance()
-                elif key == "i":  # Dab
-                    self.dab()
-                elif key == '.':
-                    break
-            except:
-                print "Exception in code:"
-                traceback.print_exc(file=sys.stdout)
-                print "Continuing..."
-                continue
+                    for l in self.legs:
+                        l.moveservo(l.servos[1], 485, speed)
+                    time.sleep(0.3)
+                    for l in self.legs:
+                        l.moveservo(l.servos[2], 400, speed)
+
+                    time.sleep(1)
+
+                    l.direction = 0
+                elif l.direction == 0:
+                    for l in self.legs:
+                        l.moveservo(l.servos[0], l.forwardangle, speed)
+                    time.sleep(0.3)
+                    for l in self.legs:
+                        l.moveservo(l.servos[1], 485, speed)
+                    time.sleep(0.3)
+                    for l in self.legs:
+                        l.moveservo(l.servos[2], 400, speed)
+
+                    time.sleep(1)
+
+                    l.direction = 1
+
+                time.sleep(0.3)
+            # elif key == "l":  # Show load
+            #     self.showLoad()
+            # elif key == "u":  # Hybrid mode
+            #     self.hybrid()
+            # elif key == "o":  # Reset
+            #     self.reset()
+            # elif key == "p":  # Show positions
+            #     self.showPositions()
+            # elif key == "b":  # Battlestance
+            #     self.battlestance()
+            # elif key == "i":  # Dab
+            #     self.dab()
+        except:
+            print("Exception in code:")
+            traceback.print_exc(file=sys.stdout)
+            print("Continuing...")
+
+    def bigsteps(self, x = 0, y = 0):
+        if y > 0:  # Walk Upstairs
+            for l in self.legs:  # raise legs
+                if l.direction == 0:
+                    continue
+                l.raiseleg(100)
+        elif x < 0:
+            for l in self.legs:
+                if l.direction == 0:
+                    continue
+                l.raiseleg(200)
+
+            time.sleep(0.4)
+
+            for l in self.legs:
+                l.step(False, 1)
+                time.sleep(0.009)
+            time.sleep(1)
+        elif x > 0:
+            for l in self.legs:
+                if l.direction == 0:
+                    continue
+                l.raiseleg(200)
+
+            time.sleep(0.4)
+            for l in self.legs:
+                l.step(False, 2)
+                time.sleep(0.009)
+            time.sleep(1)
 
     # Reset function
     def reset(self):
@@ -258,7 +280,6 @@ class Robot:
         print("Resetting tail")
 
         # Put Resetting Tail code here
-
 
         time.sleep(1)
 
