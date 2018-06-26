@@ -148,5 +148,5 @@ Website/*.ipr
 __pycache__/
 *.py[cod]
 *$py.class
-
+*.pyc
 # End of https://www.gitignore.io/api/webstorm+all
