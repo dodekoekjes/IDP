@@ -213,16 +213,16 @@ class Robot:
 
         time.sleep(1)
 
-        # Change tail position
-        l.moveservo(100, 800, speed)
-        time.sleep(0.2)
-        l.moveservo(101, 900, speed)
-        time.sleep(0.2)
-        l.moveservo(102, 1000, speed)
-        time.sleep(0.2)
-        l.moveservo(103, 500, speed)
+        # # Change tail position
+        # l.moveservo(100, 800, speed)
+        # time.sleep(0.2)
+        # l.moveservo(101, 900, speed)
+        # time.sleep(0.2)
+        # l.moveservo(102, 1000, speed)
+        # time.sleep(0.2)
+        # l.moveservo(103, 500, speed)
 
-        time.sleep(1)
+        # time.sleep(1)
 
     # Go Upstairs
     def toggleStairs(self):
@@ -251,9 +251,6 @@ class Robot:
             time.sleep(1)
         else:
             print("let the robot drive\n X:", x, "Y:", y)
-
-
-
 
     def dance(self):
         print("let the robot dance")
