@@ -4,53 +4,22 @@ import ax12
 import sys, traceback
 import RPi.GPIO as GPIO
 
-# OUDE CODE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
 
 class Robot:
 
     def __init__(self, numlegs, legjoints):
         self.legs = [Leg(i, legjoints) for i in range(numlegs)]
         self.direction = numlegs % 2
+        self.raisepos = 200
 
     def printlegs(self):
         print([l.servos for l in self.legs])
-
-    # Walking function
-    def walk(self, numsteps):
-        # Servo Speed
-        speed = 200
-
-        # Leg reset
-        for i in range(6):
-            # self.legs[i].moveservo(id, s1, speed)
-            for s in range(3):
-                if s == 0:
-                    self.legs[i].moveservo(s + 1, 450, speed)
-                else:
-                    self.legs[i].moveservo(s + 1, 350, speed)
-                time.sleep(0.5)
-        print("Waiting for reset")
-
-        for _ in range(numsteps):
-            for l in self.legs:  # Raise legs
-                if l.direction == 0:
-                    continue
-                l.raiseleg()
-            time.sleep(1)
-            for l in self.legs:  # Walking
-                l.step(False)
-            time.sleep(1)
-
-            for i in range(13):
-                print ("Servo " + str(i + 1) + ": " + str(ax12.Ax12().readPosition(i + 1)))
 
     # Dab
     def dab(self):
         speed = 200
         leg3, leg4 = self.legs[2], self.legs[3]
         i = 0
-
 
         if i == 0:
             leg3.moveservo(leg3.servos[0], 650, speed)
@@ -90,6 +59,7 @@ class Robot:
             time.sleep(0.02)
         time.sleep(1)
 
+
     # Controls
     def manual(self, x=0, y=0):
         print("manual executed with x:", x,"and y:",y)
@@ -107,7 +77,7 @@ class Robot:
                 for l in self.legs:  # raise legs
                     if l.direction == 0:
                         continue
-                    l.raiseleg()
+                    l.raiseleg(self.raisepos)
 
                 time.sleep(0.4)
                 for l in self.legs:  # walking
@@ -118,42 +88,41 @@ class Robot:
                 for l in self.legs:  # raise legs
                     if l.direction == 0:
                         continue
-                    l.raiseleg()
+                    l.raiseleg(self.raisepos)
 
-                if l.direction == 1:
-                    for l in self.legs:
-                        l.moveservo(l.servos[0], l.backwardangle, speed)
-                    time.sleep(0.3)
-                    for l in self.legs:
-                        l.moveservo(l.servos[1], 485, speed)
-                    time.sleep(0.3)
-                    for l in self.legs:
-                        l.moveservo(l.servos[2], 400, speed)
+                time.sleep(0.4)
+                for l in self.legs:  # walking
+                    l.step(True)
+                    time.sleep(0.009)
+                time.sleep(1)
+            elif x > 0:
+                for l in self.legs:
+                    if l.direction == 0:
+                        continue
+                    l.raiseleg(200)
 
-                    time.sleep(1)
+                time.sleep(0.4)
+                for l in self.legs:
+                    l.step(False, 2)
+                    time.sleep(0.009)
+                time.sleep(1)
+            elif x < 0:
+                for l in self.legs:
+                    if l.direction == 0:
+                        continue
+                    l.raiseleg(200)
 
-                    l.direction = 0
-                elif l.direction == 0:
-                    for l in self.legs:
-                        l.moveservo(l.servos[0], l.forwardangle, speed)
-                    time.sleep(0.3)
-                    for l in self.legs:
-                        l.moveservo(l.servos[1], 485, speed)
-                    time.sleep(0.3)
-                    for l in self.legs:
-                        l.moveservo(l.servos[2], 400, speed)
+                time.sleep(0.4)
 
-                    time.sleep(1)
-
-                    l.direction = 1
-
-                time.sleep(0.3)
+                for l in self.legs:
+                    l.step(False, 1)
+                    time.sleep(0.009)
+                time.sleep(1)
 
         except:
             print("Exception in code:")
             traceback.print_exc(file=sys.stdout)
             print("Continuing...")
-
 
     # Reset function
     def reset(self):
@@ -184,10 +153,10 @@ class Robot:
     def battlestance(self):
         speed = 150
 
-        # Reset
-        for l in self.legs:
-            l.reset()
-        time.sleep(1)
+        # # Reset
+        # for l in self.legs:
+        #     l.reset()
+        # time.sleep(1)
 
         leg1, leg6 = self.legs[0], self.legs[5]
         leg2, leg5 = self.legs[1], self.legs[4]
@@ -255,40 +224,36 @@ class Robot:
 
         time.sleep(1)
 
-    # Walking upstairs
-    def traplopen(self):
-        self.legs.moveservo(9, 250, 100)
-        self.legs.moveservo(12, 250, 100)
-
-        time.sleep(2)
-
-        self.legs.moveservo(8, 400, 100)
-        self.legs.moveservo(11, 400, 100)
-
-        time.sleep(2)
-
-        self.legs.moveservo(8, 150, 100)
-        self.legs.moveservo(11, 150, 100)
-
-        time.sleep(2)
-
-        self.legs.moveservo(9, 400, 100)
-        self.legs.moveservo(12, 400, 100)
+    # Go Upstairs
+    def toggleStairs(self):
+        if self.raisepos == 200:
+            self.raisepos = 400
+        elif self.raisepos == 400:
+            self.raisepos = 200
 
     # Leg Retract
-    def hybrid(self):
-        speed = 100
-        i = 0
+    def drive(self, drive_mode, x=0, y=0):
+        if not drive_mode:
+            speed = 100
+            i = 0
 
-        for l in self.legs:
-            if i <= 2:
-                l.moveservo(l.servos[0], 620, speed)
-                l.moveservo(l.servos[1], 0, speed)
-                l.moveservo(l.servos[2], 85, speed)
-            else:
-                l.moveservo(l.servos[0], 95, speed)
-                l.moveservo(l.servos[1], 0, speed)
-                l.moveservo(l.servos[2], 85, speed)
+            for l in self.legs:
+                if i <= 2:
+                    l.moveservo(l.servos[0], 620, speed)
+                    l.moveservo(l.servos[1], 0, speed)
+                    l.moveservo(l.servos[2], 85, speed)
+                else:
+                    l.moveservo(l.servos[0], 95, speed)
+                    l.moveservo(l.servos[1], 0, speed)
+                    l.moveservo(l.servos[2], 85, speed)
 
-            i += 1
-        time.sleep(1)
+                i += 1
+            time.sleep(1)
+        else:
+            print("let the robot drive\n X:", x, "Y:", y)
+
+
+
+
+    def dance(self):
+        print("let the robot dance")

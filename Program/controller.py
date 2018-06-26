@@ -31,6 +31,8 @@ class Controller(Observer):
         self.direction = ObjectDetection()
         self.movement = Movement()
         self.sound = SoundRecognition()
+        self.reset = False
+        self.drive = False
 
         # initialize bluetooth_connection connection
         self.host = connect.Connect(1, "host", 'B8:27:EB:36:3E:F8', 4, self)
@@ -85,20 +87,20 @@ class Controller(Observer):
             arg[0] = "reset"
         elif arg[0] == 5:
             arg[0] = "dance"
+        elif arg[0] == 6:
+            arg[0] = "linedance"
+        elif arg[0] == 7:
+            arg[0] = "highstep"
+        elif arg[0] == 8:
+            arg[0] = "lowstep"
+        elif arg[0] == 9:
+            arg[0] = "drive"
 
         self.has_received()
 
         print("arg[0] converted:", arg[0])
 
-        if arg[0] == "manual":
-            self.using_joysticks = True
-        else:
-            self.using_joysticks = False
-
-        if self.using_joysticks:
-            self.joystick_contsrols(arg)
-        else:
-            self.execute(arg[0])
+        self.joystick_contsrols(arg)
 
     def execute(self, arg):
         if arg == "arm":
@@ -121,21 +123,51 @@ class Controller(Observer):
         """Commands the controls"""
         joyval_float1_x = args[1]
         joyval_float1_y = args[2]
-        button1 = args[3]
+        button1 = args[3] # Left Joystick
         joyval_float2_x = args[4]
         joyval_float2_y = args[5]
-        button2 = args[6]
+        button2 = args[6] # Right Joystick
 
         self.speed1_x = abs(200*joyval_float1_x)
         self.speed1_y = abs(200*joyval_float1_y)
         self.speed2_x = abs(200*joyval_float2_x)
         self.speed2_y = abs(200*joyval_float2_y)
+
+        # test
         for arg in args:
             print("--", arg)
         if args[0] == "manual":
+            if self.reset:
+                self.robot.reset()
+                self.reset = False
             self.robot.manual(joyval_float1_x, joyval_float1_y)
+            self.drive = False
+        elif args[0] == "highstep":
+            if self.reset:
+                self.reset = False
+            self.robot.toggleStairs()
+            self.robot.manual(joyval_float1_x, joyval_float1_y)
+        elif button1 or args[0] == "reset":
+            self.robot.reset()
+        elif args[0] == "battlestance":
+            self.robot.battlestance()
+            self.drive = False
+        elif args[0] == "drive" or button2:
+
+            self.reset = True
+            if not self.drive:
+                self.robot.drive(self.drive)
+                self.drive = True
+            else:
+                self.robot.drive(self.drive, joyval_float2_x, joyval_float2_y)
+
+        elif args[0] == "dab":
+            self.robot.dab()
+        elif args[0] == "dance":
+            self.robot.dance()
+            self.reset = True
         else:
-            print("do something else -> line 132 controller.py")
+            print("do something else -> line 166 controller.py")
 
     def controls(self):
         """Command the controls"""
