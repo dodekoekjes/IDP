@@ -14,6 +14,7 @@ class Robot:
         self.raisepos = 200
         self.manual_direction = 0
         self.leds = leds.Leds()
+        self.leds.idle()
 
     def printlegs(self):
         print([l.servos for l in self.legs])
@@ -65,7 +66,8 @@ class Robot:
 
     # Controls
     def manual(self, x1=0, y1=0, b1=False, x2=0, y2=0, b2=False):
-        print("manual executed with x1:", x1, "and y1:", y1)
+        print("manual executed with x1:", x1, "and y1:", y1, "and b1:", b1,
+              "and x2:", x2, "and y2:", y2, "and b2:", b2)
         mv_delta = 30
         yspeed = 200 * abs(y1)
         speed = 200
@@ -73,7 +75,7 @@ class Robot:
         s2 = 400  # 150
         s3 = 400  # 150
 
-        print("HEINZ: Manual mode activated")
+        print("HEINZ: Manual mode executed")
 
         try:
             if y1 > 0: # Walking
@@ -156,21 +158,28 @@ class Robot:
                     self.legs[i].moveservo(id, s1, speed)
             elif y2 > 0 and b2:
                 if self.manual_direction == 0:
-                    print(0)
+                    print("manual direction", 0)
                     self.leds.idle()
                 elif self.manual_direction == 1:
+                    print("manual direction", 1)
                     self.leds.vumeter()
                 elif self.manual_direction == 2:
+                    print("manual direction", 2)
                     self.leds.disco()
                 elif self.manual_direction == 3:
+                    print("manual direction", 3)
                     self.leds.rgb()
                 elif self.manual_direction == 4:
+                    print("manual direction", 4)
                     self.leds.breath()
                 elif self.manual_direction == 5:
+                    print("manual direction", 5)
                     self.leds.lazer()
                 elif self.manual_direction == 6:
+                    print("manual direction", 6)
                     self.leds.beat()
                 elif self.manual_direction == 7:
+                    print("manual direction", 7)
                     self.leds.shutdown()
                 if self.manual_direction < 8:
                     self.manual_direction = self.manual_direction + 1
@@ -311,66 +320,63 @@ class Robot:
             time.sleep(1)
         else:
             print("let the robot drive\n X:", x, "Y:", y)
-            PIN_PWM_R = 16 #36
-            PIN_FORWARD_R = 21 #40
-            PIN_BACKWARD_R = 20 #38
-
-            PIN_PWM_L = 13 #33
-            PIN_BACKWARD_L = 19 #35
-            PIN_FORWARD_L = 26 #37
-            SPEED =  100
-
-            GPIO.setup(PIN_PWM_R, GPIO.OUT)
-            GPIO.setup(PIN_FORWARD_R, GPIO.OUT)
-            GPIO.setup(PIN_BACKWARD_R, GPIO.OUT)
-
-            GPIO.setup(PIN_PWM_L, GPIO.OUT)
-            GPIO.setup(PIN_FORWARD_L, GPIO.OUT)
-            GPIO.setup(PIN_BACKWARD_L, GPIO.OUT)
-
-            pwmR=GPIO.PWM(PIN_PWM_R, 100)
-            pwmL=GPIO.PWM(PIN_PWM_L, 100)
-            pwmR.start(0)
-            pwmL.start(0)
-            is_pressed = False
-
-            if x == 0 and y > 0.5:
-                GPIO.output(PIN_FORWARD_R, True)
-                GPIO.output(PIN_BACKWARD_R, False)
-                GPIO.output(PIN_FORWARD_L, True)
-                GPIO.output(PIN_BACKWARD_L, False)
-            elif x == 0 and y < -0.5:
-                GPIO.output(PIN_FORWARD_R, False)
-                GPIO.output(PIN_BACKWARD_R, True)
-                GPIO.output(PIN_FORWARD_L, False)
-                GPIO.output(PIN_BACKWARD_L, True)
-            elif x > 0.5 and y == 0:
-                GPIO.output(PIN_FORWARD_R, False)
-                GPIO.output(PIN_BACKWARD_R, True)
-                GPIO.output(PIN_FORWARD_L, True)
-                GPIO.output(PIN_BACKWARD_L, False)
-            elif x < -0.5 and y == 0:
-                GPIO.output(PIN_FORWARD_R, True)
-                GPIO.output(PIN_BACKWARD_R, False)
-                GPIO.output(PIN_FORWARD_L, False)
-                GPIO.output(PIN_BACKWARD_L, True)
-            
-            pwmR.ChangeDutyCycle(SPEED)
-            pwmL.ChangeDutyCycle(SPEED)
-            GPIO.output(PIN_PWM_R, True)
-            GPIO.output(PIN_PWM_L, True)
-
-            if x == 0 and y == 0:
-                GPIO.output(PIN_PWM_R, False)
-                GPIO.output(PIN_PWM_L, False)
-
-                GPIO.output(PIN_BACKWARD_R, False)
-                GPIO.output(PIN_FORWARD_R, False)
-                GPIO.output(PIN_BACKWARD_L, False)
-                GPIO.output(PIN_FORWARD_L, False)
-
-
-
+            # PIN_PWM_R = 16 #36
+            # PIN_FORWARD_R = 21 #40
+            # PIN_BACKWARD_R = 20 #38
+            #
+            # PIN_PWM_L = 13 #33
+            # PIN_BACKWARD_L = 19 #35
+            # PIN_FORWARD_L = 26 #37
+            # SPEED =  100
+            #
+            # GPIO.setup(PIN_PWM_R, GPIO.OUT)
+            # GPIO.setup(PIN_FORWARD_R, GPIO.OUT)
+            # GPIO.setup(PIN_BACKWARD_R, GPIO.OUT)
+            #
+            # GPIO.setup(PIN_PWM_L, GPIO.OUT)
+            # GPIO.setup(PIN_FORWARD_L, GPIO.OUT)
+            # GPIO.setup(PIN_BACKWARD_L, GPIO.OUT)
+            #
+            # pwmR=GPIO.PWM(PIN_PWM_R, 100)
+            # pwmL=GPIO.PWM(PIN_PWM_L, 100)
+            # pwmR.start(0)
+            # pwmL.start(0)
+            # is_pressed = False
+            #
+            # if x == 0 and y > 0.5:
+            #     GPIO.output(PIN_FORWARD_R, True)
+            #     GPIO.output(PIN_BACKWARD_R, False)
+            #     GPIO.output(PIN_FORWARD_L, True)
+            #     GPIO.output(PIN_BACKWARD_L, False)
+            # elif x == 0 and y < -0.5:
+            #     GPIO.output(PIN_FORWARD_R, False)
+            #     GPIO.output(PIN_BACKWARD_R, True)
+            #     GPIO.output(PIN_FORWARD_L, False)
+            #     GPIO.output(PIN_BACKWARD_L, True)
+            # elif x > 0.5 and y == 0:
+            #     GPIO.output(PIN_FORWARD_R, False)
+            #     GPIO.output(PIN_BACKWARD_R, True)
+            #     GPIO.output(PIN_FORWARD_L, True)
+            #     GPIO.output(PIN_BACKWARD_L, False)
+            # elif x < -0.5 and y == 0:
+            #     GPIO.output(PIN_FORWARD_R, True)
+            #     GPIO.output(PIN_BACKWARD_R, False)
+            #     GPIO.output(PIN_FORWARD_L, False)
+            #     GPIO.output(PIN_BACKWARD_L, True)
+            #
+            # pwmR.ChangeDutyCycle(SPEED)
+            # pwmL.ChangeDutyCycle(SPEED)
+            # GPIO.output(PIN_PWM_R, True)
+            # GPIO.output(PIN_PWM_L, True)
+            #
+            # if x == 0 and y == 0:
+            #     GPIO.output(PIN_PWM_R, False)
+            #     GPIO.output(PIN_PWM_L, False)
+            #
+            #     GPIO.output(PIN_BACKWARD_R, False)
+            #     GPIO.output(PIN_FORWARD_R, False)
+            #     GPIO.output(PIN_BACKWARD_L, False)
+            #     GPIO.output(PIN_FORWARD_L, False)
 
     def dance(self):
         print("let the robot dance")
