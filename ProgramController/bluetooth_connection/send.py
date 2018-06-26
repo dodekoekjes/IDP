@@ -92,6 +92,12 @@ class Send(threading.Thread):
             arg[0] = 4
         elif arg[0] == "dance":
             arg[0] = 5
+        elif arg[0] == "linedance":
+            arg[0] = 6
+        elif arg[0] == "highstep":
+            arg[0] = 7
+        elif arg[0] == "lowstep":
+            arg[0] = 8
 
         arr = arg
         arr_bytes = bytearray()
