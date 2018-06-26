@@ -146,7 +146,7 @@ class Controller(Observer):
             if self.reset:
                 self.reset = False
             self.robot.toggleStairs()
-            self.robot.manual(joyval_float1_x, joyval_float1_y)
+            self.robot.manual(joyval_float1_x, joyval_float1_y, button1, joyval_float2_x, joyval_float2_y, button2)
         elif button1 or args[0] == "reset":
             self.robot.reset()
         elif args[0] == "battlestance":

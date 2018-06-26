@@ -59,8 +59,6 @@ class Send(threading.Thread):
         """Sends controller input"""
         # Create the client socket
 
-
-
         print("connected.  type stuff")
         data = arg
         self.sock.send(data)
