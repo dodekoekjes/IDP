@@ -139,6 +139,7 @@ class Controller(Observer):
         self.speed2_x = abs(200*joyval_float2_x)
         self.speed2_y = abs(200*joyval_float2_y)
 
+        # test
         for arg in args:
             print("--", arg)
         if args[0] == "manual":
