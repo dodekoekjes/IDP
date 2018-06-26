@@ -21,6 +21,7 @@ class Window(QWidget):
         self.font_btn.setPointSize(12)
         self.init = False
         self.joy_display = []
+        self.highstep = False
 
         #self.controller = None
         self.thread_controller = ThrControler(2, "Controller")
@@ -72,12 +73,22 @@ class Window(QWidget):
     
     def step_height(self):
         print("Toggling Step height...")
+        if not self.highstep:
+            self.thread_controller.update("highstep")
+            self.lbl_steps.setText("Steps:\t\tHIGH")
+            self.highstep = True
+        else:
+            self.thread_controller.update("lowstep")
+            self.lbl_steps.setText("Steps:\t\tLOW")
+            self.highstep = False
     
     def dance(self):
         print("Dancing...")
+        self.thread_controller.update("dance")
     
     def line_dance(self):
         print("Line Dancing...")
+        self.thread_controller.update("linedance")
 
     def toggle_arm(self):
         print("Toggling Arm...")
@@ -123,8 +134,8 @@ class Window(QWidget):
         self.lbl_movement = QLabel("Movement:\tLEGS", self)
         self.lbl_movement.move(88*2+8,8+16*1)
 
-        self.lbl_movement = QLabel("Steps:\t\tHIGH", self)
-        self.lbl_movement.move(88*2+8,8+16*2)
+        self.lbl_steps = QLabel("Steps:\t\tLOW", self)
+        self.lbl_steps.move(88*2+8,8+16*2)
 
         self.lbl_joy1 = QLabel("Joy1:\t\tX: 0.000, Y: 0.000", self)
         self.lbl_joy1.move(88*2+8,8*2+16*3)
