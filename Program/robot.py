@@ -4,7 +4,6 @@ import ax12
 import sys, traceback
 import RPi.GPIO as GPIO
 
-# OUDE CODE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 class Robot:
 
@@ -15,7 +14,6 @@ class Robot:
 
     def printlegs(self):
         print([l.servos for l in self.legs])
-
 
     # Dab
     def dab(self):
@@ -45,7 +43,6 @@ class Robot:
 
         time.sleep(1)
 
-
     # Show load
     def showLoad(self):
         print("\n --- LOAD ON SERVOS ---")
@@ -53,7 +50,6 @@ class Robot:
             print("Servo " + str(a) + ": " + str(ax12.Ax12().readLoad(a)))
             time.sleep(0.02)
         time.sleep(1)
-
 
     # Show positions
     def showPositions(self):
@@ -99,12 +95,34 @@ class Robot:
                     l.step(True)
                     time.sleep(0.009)
                 time.sleep(1)
+            elif x > 0:
+                for l in self.legs:
+                    if l.direction == 0:
+                        continue
+                    l.raiseleg(200)
+
+                time.sleep(0.4)
+                for l in self.legs:
+                    l.step(False, 2)
+                    time.sleep(0.009)
+                time.sleep(1)
+            elif x < 0:
+                for l in self.legs:
+                    if l.direction == 0:
+                        continue
+                    l.raiseleg(200)
+
+                time.sleep(0.4)
+
+                for l in self.legs:
+                    l.step(False, 1)
+                    time.sleep(0.009)
+                time.sleep(1)
 
         except:
             print("Exception in code:")
             traceback.print_exc(file=sys.stdout)
             print("Continuing...")
-
 
     # Reset function
     def reset(self):
@@ -131,15 +149,14 @@ class Robot:
 
         print("Done resetting!")
 
-
     # Battlestance
     def battlestance(self):
         speed = 150
 
-        # Reset
-        for l in self.legs:
-            l.reset()
-        time.sleep(1)
+        # # Reset
+        # for l in self.legs:
+        #     l.reset()
+        # time.sleep(1)
 
         leg1, leg6 = self.legs[0], self.legs[5]
         leg2, leg5 = self.legs[1], self.legs[4]
@@ -207,7 +224,6 @@ class Robot:
 
         time.sleep(1)
 
-
     # Go Upstairs
     def toggleStairs(self):
         if self.raisepos == 200:
@@ -215,25 +231,29 @@ class Robot:
         elif self.raisepos == 400:
             self.raisepos = 200
 
-
     # Leg Retract
-    def hybrid(self):
-        speed = 100
-        i = 0
+    def drive(self, drive_mode, x=0, y=0):
+        if not drive_mode:
+            speed = 100
+            i = 0
 
-        for l in self.legs:
-            if i <= 2:
-                l.moveservo(l.servos[0], 620, speed)
-                l.moveservo(l.servos[1], 0, speed)
-                l.moveservo(l.servos[2], 85, speed)
-            else:
-                l.moveservo(l.servos[0], 95, speed)
-                l.moveservo(l.servos[1], 0, speed)
-                l.moveservo(l.servos[2], 85, speed)
+            for l in self.legs:
+                if i <= 2:
+                    l.moveservo(l.servos[0], 620, speed)
+                    l.moveservo(l.servos[1], 0, speed)
+                    l.moveservo(l.servos[2], 85, speed)
+                else:
+                    l.moveservo(l.servos[0], 95, speed)
+                    l.moveservo(l.servos[1], 0, speed)
+                    l.moveservo(l.servos[2], 85, speed)
 
-            i += 1
-        time.sleep(1)
+                i += 1
+            time.sleep(1)
+        else:
+            print("let the robot drive\n X:", x, "Y:", y)
 
 
-    # def drive(self):
-        # Deconstruct class
+
+
+    def dance(self):
+        print("let the robot dance")
