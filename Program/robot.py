@@ -3,6 +3,7 @@ import time
 import ax12
 import sys, traceback
 import RPi.GPIO as GPIO
+import leds
 
 
 class Robot:
@@ -11,6 +12,9 @@ class Robot:
         self.legs = [Leg(i, legjoints) for i in range(numlegs)]
         self.direction = numlegs % 2
         self.raisepos = 200
+        self.manual_direction = 0
+        self.leds = leds.Leds()
+        self.leds.idle()
 
         # GPIO.setmode(GPIO.BCM)
 
@@ -63,19 +67,20 @@ class Robot:
 
 
     # Controls
-    def manual(self, x=0, y=0):
-        print("manual executed with x:", x,"and y:",y)
+    def manual(self, x1=0, y1=0, b1=False, x2=0, y2=0, b2=False):
+        print("manual executed with x1:", x1, "and y1:", y1, "and b1:", b1,
+              "and x2:", x2, "and y2:", y2, "and b2:", b2)
         mv_delta = 30
-        yspeed = 200 * abs(y)
+        yspeed = 200 * abs(y1)
         speed = 200
         s1 = 350
         s2 = 400  # 150
         s3 = 400  # 150
 
-        print("HEINZ: Manual mode activated")
+        print("HEINZ: Manual mode executed")
 
         try:
-            if y > 0: # Walking
+            if y1 > 0: # Walking
                 for l in self.legs:  # raise legs
                     if l.direction == 0:
                         continue
@@ -86,7 +91,7 @@ class Robot:
                     l.step(False)
                     time.sleep(0.009)
                 time.sleep(1)
-            elif y < 0 : # Reverse walking
+            elif y1 < 0: # Reverse walking
                 for l in self.legs:  # raise legs
                     if l.direction == 0:
                         continue
@@ -97,7 +102,7 @@ class Robot:
                     l.step(True)
                     time.sleep(0.009)
                 time.sleep(1)
-            elif x > 0:
+            elif x1 > 0:
                 for l in self.legs:
                     if l.direction == 0:
                         continue
@@ -108,7 +113,7 @@ class Robot:
                     l.step(False, 2)
                     time.sleep(0.009)
                 time.sleep(1)
-            elif x < 0:
+            elif x1 < 0:
                 for l in self.legs:
                     if l.direction == 0:
                         continue
@@ -120,6 +125,70 @@ class Robot:
                     l.step(False, 1)
                     time.sleep(0.009)
                 time.sleep(1)
+
+            elif x2 < 0 and b2 and s2 > 150:
+                s2 -= mv_delta
+                for i in range(6):
+                    servo_id = i * 3 + 2
+                    self.legs[i].moveservo(servo_id, s2, speed)
+            elif x2 < 0 and not b2 and s2 < 500:
+                s2 += mv_delta
+                for i in range(6):
+                    servo_id = i * 3 + 2
+                    self.legs[i].moveservo(servo_id, s2, speed)
+            elif x2 > 0 and b2 and s3 > 150:
+                s3 -= mv_delta
+                for i in range(6):
+                    # print i
+                    id = i * 3 + 3
+                    self.legs[i].moveservo(id, s3, speed)
+            elif x2 < 0 and not b2 and s3 < 625:
+                s3 += mv_delta
+                for i in range(6):
+                    # print i
+                    id = i * 3 + 3
+                    self.legs[i].moveservo(id, s3, speed)
+            elif y2 < 0 and b2 and s1 > 150:
+                s1 -= mv_delta
+                for i in range(6):
+                    id = i * 3 + 1
+                    self.legs[i].moveservo(id, s1, speed)
+            elif y2 < 0 and not b2 and s1 < 550:
+                s1 += mv_delta
+                for i in range(6):
+                    id = i * 3 + 1
+                    self.legs[i].moveservo(id, s1, speed)
+            elif y2 > 0 and b2:
+                if self.manual_direction == 0:
+                    print("manual direction", 0)
+                    self.leds.idle()
+                elif self.manual_direction == 1:
+                    print("manual direction", 1)
+                    self.leds.vumeter()
+                elif self.manual_direction == 2:
+                    print("manual direction", 2)
+                    self.leds.disco()
+                elif self.manual_direction == 3:
+                    print("manual direction", 3)
+                    self.leds.rgb()
+                elif self.manual_direction == 4:
+                    print("manual direction", 4)
+                    self.leds.breath()
+                elif self.manual_direction == 5:
+                    print("manual direction", 5)
+                    self.leds.lazer()
+                elif self.manual_direction == 6:
+                    print("manual direction", 6)
+                    self.leds.beat()
+                elif self.manual_direction == 7:
+                    print("manual direction", 7)
+                    self.leds.shutdown()
+                if self.manual_direction < 8:
+                    self.manual_direction = self.manual_direction + 1
+                else:
+                    self.manual_direction = 0
+
+
 
         except:
             print("Exception in code:")
