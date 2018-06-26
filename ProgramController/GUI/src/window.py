@@ -69,6 +69,15 @@ class Window(QWidget):
     def toggle_legs(self):
         print("Toggling Legs...")
         self.thread_controller.update("manual")
+    
+    def step_height(self):
+        print("Toggling Step height...")
+    
+    def dance(self):
+        print("Dancing...")
+    
+    def line_dance(self):
+        print("Line Dancing...")
 
     def toggle_arm(self):
         print("Toggling Arm...")
@@ -104,38 +113,25 @@ class Window(QWidget):
         self.addButton("DAB", position=(96, 96), func=self.dab)
         self.addButton("Catch\nBall", position=(8, 88*2+8), func=self.catchball)
         self.addButton("Reset\nPositions", position=(96, 88*2+8), func=self.reset)
+        self.addButton("Step\nHeight", position=(88*2+8, 88*2+8), func=self.step_height)
+        self.addButton("Line\nDance", position=(88*3+8, 88*2+8), func=self.line_dance)
+        self.addButton("D.A.N.C.E.", position=(88*4+8, 88*2+8), func=self.dance)
 
-        self.lbl_controls = QLabel("Controls:\tMOVE", self)
+        self.lbl_controls = QLabel("Controls:\t\tMOVE", self)
         self.lbl_controls.move(88*2+8,8+16*0)
 
         self.lbl_movement = QLabel("Movement:\tLEGS", self)
         self.lbl_movement.move(88*2+8,8+16*1)
 
+        self.lbl_movement = QLabel("Steps:\t\tHIGH", self)
+        self.lbl_movement.move(88*2+8,8+16*2)
+
         self.lbl_joy1 = QLabel("Joy1:\t\tX: 0.000, Y: 0.000", self)
-        self.lbl_joy1.move(88*2+8,8*2+16*2)
+        self.lbl_joy1.move(88*2+8,8*2+16*3)
         
         self.lbl_joy2 = QLabel("Joy2:\t\tX: 0.000, Y: 0.000", self)
-        self.lbl_joy2.move(88*2+8,8*2+16*3)
+        self.lbl_joy2.move(88*2+8,8*2+16*4)
 
-        self.joy_display.append(
-            Joystick(
-                name="joy1", 
-                rad_outer=(35, 35), 
-                rad_inner=(20, 20),
-                center=QPoint(88*2+8 + 40, 88*2+8 + 40),
-                click=False
-            )
-        )
-
-        self.joy_display.append(
-            Joystick(
-                name="joy2", 
-                rad_outer=(35, 35), 
-                rad_inner=(20, 20),
-                center=QPoint(88*3+8 + 40, 88*2+8 + 40),
-                click=False
-            )
-        )
 
     def paintEvent(self, event):
         paint = QPainter()
