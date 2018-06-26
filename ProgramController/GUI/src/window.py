@@ -47,18 +47,18 @@ class Window(QWidget):
             x2 = int(output[3])
             y2 = int(output[4])
             b2 = bool(output[5])
-            x1_float = MULTIPLIER*x1-1
-            y1_float = MULTIPLIER*y1-1
+            x2_float = MULTIPLIER*x1-1
+            y2_float = -(MULTIPLIER*y1-1)
 
-            x2_float = MULTIPLIER*x2-1
-            y2_float = MULTIPLIER*y2-1
+            x1_float = MULTIPLIER*x2-1
+            y1_float = -(MULTIPLIER*y2-1)
             if self.init:
                 # self.joy_display[0].set_pos_inner(x1_float, y1_float)
                 # self.joy_display[0].click = b1
                 # self.joy_display[1].set_pos_inner(x2_float, y2_float)
                 # self.joy_display[1].click = b2
                 self.lbl_joy1.setText("Joy1:\t\tX: "+str(x1_float)[:5]+", Y: "+str(y1_float)[:5])
-                time.sleep(0.5)
+                # time.sleep(0.5)
                 self.lbl_joy2.setText("Joy2:\t\tX: "+str(x2_float)[:5]+", Y: "+str(y2_float)[:5])
                 time.sleep(0.5)
 
@@ -117,7 +117,7 @@ class Window(QWidget):
         self.addButton("Line\nDance", position=(88*3+8, 88*2+8), func=self.line_dance)
         self.addButton("D.A.N.C.E.", position=(88*4+8, 88*2+8), func=self.dance)
 
-        self.lbl_controls = QLabel("Controls:\t\tMOVE", self)
+        self.lbl_controls = QLabel("Controls:\tMOVE", self)
         self.lbl_controls.move(88*2+8,8+16*0)
 
         self.lbl_movement = QLabel("Movement:\tLEGS", self)
@@ -133,25 +133,25 @@ class Window(QWidget):
         self.lbl_joy2.move(88*2+8,8*2+16*4)
 
 
-    def paintEvent(self, event):
-        paint = QPainter()
-        paint.begin(self)
-        # optional
-        paint.setRenderHint(QPainter.Antialiasing)
-        # make a white drawing background
-        paint.setBrush(Qt.white)
-        paint.drawRect(event.rect())
-        paint.setPen(Qt.black)
+    # def paintEvent(self, event):
+    #     paint = QPainter()
+    #     paint.begin(self)
+    #     # optional
+    #     paint.setRenderHint(QPainter.Antialiasing)
+    #     # make a white drawing background
+    #     paint.setBrush(Qt.white)
+    #     paint.drawRect(event.rect())
+    #     paint.setPen(Qt.black)
 
-        col_clicked = QColor(50, 255, 50)
-        col_normal  = QColor(210, 210, 210)
-        # print(joy['pos_inner'])
-        for joy in self.joy_display:
-            paint.setBrush(Qt.gray)
-            paint.drawEllipse(joy.center, joy.rad_outer[0], joy.rad_outer[1])
-            paint.setBrush(Joystick.color_click if joy.click else Joystick.color)
-            paint.drawEllipse(joy.pos_inner, joy.rad_inner[0], joy.rad_inner[1])
-        paint.end()
+    #     col_clicked = QColor(50, 255, 50)
+    #     col_normal  = QColor(210, 210, 210)
+    #     # print(joy['pos_inner'])
+    #     for joy in self.joy_display:
+    #         paint.setBrush(Qt.gray)
+    #         paint.drawEllipse(joy.center, joy.rad_outer[0], joy.rad_outer[1])
+    #         paint.setBrush(Joystick.color_click if joy.click else Joystick.color)
+    #         paint.drawEllipse(joy.pos_inner, joy.rad_inner[0], joy.rad_inner[1])
+    #     paint.end()
 
     def initUI(self):
         screen_res = 480, 320   # Resolution of the pi's screen

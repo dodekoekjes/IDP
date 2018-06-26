@@ -37,14 +37,14 @@ class Controller(Observer):
             print("Joystick Input:", self.controller_input)
 
             # joystick 1
-            x1 = int(output[0])*-1
-            y1 = int(output[1])*-1
-            b1 = bool(output[2])
+            x2 = int(output[0])
+            y2 = int(output[1])
+            b2 = bool(output[2])
 
             # joystick 2
-            x2 = int(output[3])*-1
-            y2 = int(output[4])*-1
-            b2 = bool(output[5])
+            x1 = int(output[3])
+            y1 = int(output[4])
+            b1 = bool(output[5])
 
             # processing inputs
             right1 = False
@@ -163,7 +163,7 @@ class Controller(Observer):
             else:
                 joyval_float2_y = MULTIPLIER * y2 - 1
 
-            command = [self.stance, joyval_float1_x, joyval_float1_y, b1, joyval_float2_x, joyval_float2_y, b2]
+            command = [self.stance, joyval_float1_x, -joyval_float1_y, b1, joyval_float2_x, -joyval_float2_y, b2]
 
             # testing
             print(x1, y1, b1, x2, y2, b2)
@@ -174,12 +174,12 @@ class Controller(Observer):
             try:
                 self.client.controller_input(command)
             except:
-                # print("uncomment next lines to make a retry loop")
-                print("retrying...")
-                self.client = send.Send(2, "client", 'B8:27:EB:7F:19:3C', 4)#''B8:27:EB:36:3E:F8', 4)
-                self.client.start()
-                time.sleep(5)
-                self.controls()
+                print("uncomment next lines to make a retry loop")
+                # print("retrying...")
+                # self.client = send.Send(2, "client", 'B8:27:EB:7F:19:3C', 4)#''B8:27:EB:36:3E:F8', 4)
+                # self.client.start()
+                # time.sleep(5)
+                # self.controls()
 
     def update(self, observable, arg):
         """updates the modules"""
