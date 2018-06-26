@@ -12,6 +12,8 @@ class Robot:
         self.direction = numlegs % 2
         self.raisepos = 200
 
+        # GPIO.setmode(GPIO.BCM)
+
     def printlegs(self):
         print([l.servos for l in self.legs])
 
@@ -231,6 +233,7 @@ class Robot:
         elif self.raisepos == 400:
             self.raisepos = 200
 
+
     # Leg Retract
     def drive(self, drive_mode, x=0, y=0):
         if not drive_mode:
@@ -251,6 +254,7 @@ class Robot:
             time.sleep(1)
         else:
             print("let the robot drive\n X:", x, "Y:", y)
+        try:
             PIN_PWM_R = 16 #36
             PIN_FORWARD_R = 21 #40
             PIN_BACKWARD_R = 20 #38
@@ -272,8 +276,7 @@ class Robot:
             pwmL=GPIO.PWM(PIN_PWM_L, 100)
             pwmR.start(0)
             pwmL.start(0)
-            is_pressed = False
-
+            
             if x == 0 and y > 0.5:
                 GPIO.output(PIN_FORWARD_R, True)
                 GPIO.output(PIN_BACKWARD_R, False)
@@ -308,6 +311,11 @@ class Robot:
                 GPIO.output(PIN_FORWARD_R, False)
                 GPIO.output(PIN_BACKWARD_L, False)
                 GPIO.output(PIN_FORWARD_L, False)
+            
+            pwmR.stop()
+            pwmL.stop()
+        except:
+            traceback.print_exc(file=sys.stdout)
 
 
 
