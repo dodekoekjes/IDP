@@ -149,4 +149,6 @@ __pycache__/
 *.py[cod]
 *$py.class
 *.pyc
+venv
+venv2.7
 # End of https://www.gitignore.io/api/webstorm+all
